@@ -8,4 +8,6 @@ class HolidayRepository @Inject constructor(
     private val service: HolidayService
 ) {
     suspend fun getHolidaysByYear(year: String): List<HolidayModel> = service.getHolidaysByYear(year)
+
+    suspend fun getTodayHoliday(): String = service.getTodayHoliday()
 }
