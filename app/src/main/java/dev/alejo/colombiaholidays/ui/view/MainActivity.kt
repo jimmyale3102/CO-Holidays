@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import dev.alejo.colombiaholidays.core.lightStatusBar
+import dev.alejo.colombiaholidays.core.setFullScreen
 import dev.alejo.colombiaholidays.databinding.ActivityMainBinding
 import dev.alejo.colombiaholidays.ui.viewmodel.HolidayViewModel
 
@@ -17,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setFullScreen(window)
+        lightStatusBar(window, false)
         viewModel.onCreate()
         initObservables()
     }
