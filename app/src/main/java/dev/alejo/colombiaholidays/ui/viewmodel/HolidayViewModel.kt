@@ -16,6 +16,7 @@ class HolidayViewModel @Inject constructor(
 ): ViewModel(){
 
     val holidayByYearResponse = MutableLiveData<List<HolidayModel>>()
+    val currentHolidayResponse = MutableLiveData<HolidayModel>()
 
     fun onCreate() {
         val currentYear = Calendar.getInstance().get(Calendar.YEAR).toString()
@@ -28,7 +29,6 @@ class HolidayViewModel @Inject constructor(
             val result = getHolidayUseCase(year)
             if(result.isNotEmpty())
                 holidayByYearResponse.postValue(result)
-            println(holidayByYearResponse.toString())
         }
     }
 
