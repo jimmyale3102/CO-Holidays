@@ -3,7 +3,6 @@ package dev.alejo.colombiaholidays.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.databinding.ActivityMainBinding
 import dev.alejo.colombiaholidays.ui.viewmodel.HolidayViewModel
@@ -23,8 +22,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservables() {
-        viewModel.holidayByYearResponse.observe(this, Observer { holidays ->
+        viewModel.holidayByYearResponse.observe(this) { holidays ->
             holidays.forEach { it -> println(it.localName) }
-        })
+        }
+        viewModel.todayHolidayResponse.observe(this) { todayHoliday ->
+            runOnUiThread { showTodayHoliday(todayHoliday) }
+        }
+    }
+
+    private fun showTodayHoliday(todayHoliday: String) {
+        binding.holiday.text = todayHoliday
     }
 }
