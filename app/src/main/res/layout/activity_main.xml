@@ -4,16 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/turquoise_blue"
     tools:context=".ui.view.MainActivity">
 
-    <TextView
-        android:id="@+id/holiday"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/sad_boy"
+        android:scaleType="centerCrop"
+        android:alpha="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/about_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_margin="@dimen/medium"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_information"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/holiday_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x_large"
+        android:layout_marginStart="@dimen/medium"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/light_white"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:text="@string/it_is_holiday"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x_large"
+        android:layout_marginEnd="@dimen/x_large"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/holiday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/light_white"
+            android:textAlignment="center"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            tools:text="New Year's Day" />
+
+        <TextView
+            android:id="@+id/holiday_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/light_white"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            tools:text="New Year’s Day is the first day of the year, or January 1, in the Gregorian calendar." />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
