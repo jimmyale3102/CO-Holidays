@@ -64,4 +64,7 @@ dependencies {
     // Dagger-Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // Calendar
+    implementation 'com.github.dorukkangal:material-calendar-view:1.5.3'
 }
