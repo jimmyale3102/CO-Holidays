@@ -3,6 +3,7 @@ package dev.alejo.colombiaholidays.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.core.lightStatusBar
 import dev.alejo.colombiaholidays.core.setFullScreen
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         lightStatusBar(window, false)
         viewModel.onCreate()
         initObservables()
+        initUI()
     }
 
     private fun initObservables() {
@@ -40,5 +42,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun showTodayHoliday(todayHoliday: String) {
         binding.holiday.text = todayHoliday
+    }
+
+    private fun initUI() {
+        BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
+            peekHeight = 64
+            this.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 }

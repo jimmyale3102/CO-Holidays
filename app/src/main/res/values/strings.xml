@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ColombiaHolidays</string>
     <string name="it_is_holiday">¡It\'s holiday!</string>
+    <string name="all_holidays">All holidays</string>
 </resources>

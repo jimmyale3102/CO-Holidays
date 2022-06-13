@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,37 +14,48 @@
         android:scaleType="centerCrop"
         android:alpha="0.2"
         app:srcCompat="@drawable/sad_boy"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="ContentDescription" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/about_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:layout_marginTop="@dimen/medium_large"
         android:layout_marginEnd="@dimen/medium"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_information"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:src="@drawable/ic_information"/>
 
-    <TextView
-        android:id="@+id/holiday_title"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x_large"
+        android:layout_marginTop="@dimen/medium_large"
         android:layout_marginStart="@dimen/medium"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/light_white"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        android:text="@string/it_is_holiday"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/holiday_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/light_white"
+            android:textAlignment="center"
+            android:textSize="34sp"
+            android:text="@string/it_is_holiday"/>
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/light_white"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:text="@string/it_is_holiday"
+            tools:text="13 days left"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,10 +63,7 @@
         android:layout_marginStart="@dimen/x_large"
         android:layout_marginEnd="@dimen/x_large"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/holiday"
@@ -84,20 +92,40 @@
     <FrameLayout
         android:id="@+id/all_holidays_bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/top_rounded_shape"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        style="?attr/bottomSheetStyle"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <ImageView
-            android:layout_width="70dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_baseline_remove"
-            tools:ignore="ContentDescription" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_baseline_remove"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/all_holidays"/>
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="880dp"
+                layout="@layout/bottom_sheet" />
+
+        </LinearLayout>
 
     </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
