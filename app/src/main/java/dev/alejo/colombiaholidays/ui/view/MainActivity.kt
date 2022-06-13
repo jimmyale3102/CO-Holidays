@@ -1,10 +1,10 @@
 package dev.alejo.colombiaholidays.ui.view
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import com.applandeo.materialcalendarview.model.EventDay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.R
@@ -15,9 +15,8 @@ import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.ActivityMainBinding
 import dev.alejo.colombiaholidays.ui.viewmodel.HolidayViewModel
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
+
 
 @SuppressLint("SimpleDateFormat")
 @AndroidEntryPoint
@@ -26,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HolidayViewModel by viewModels()
     private val dateFormat by lazy { SimpleDateFormat("EEE, MMM dd") }
+    private val holidaysList = mutableListOf<EventDay>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initObservables() {
         viewModel.holidayByYearResponse.observe(this) { holidays ->
-            holidays.forEach { it -> println(it.localName) }
+            holidays.forEach { holiday ->
+                println(holiday.date)
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.YEAR, holiday.date.split("-")[0].toInt())
+                calendar.set(Calendar.MONTH, holiday.date.split("-")[1].toInt() - 1)
+                calendar.set(Calendar.DAY_OF_MONTH, holiday.date.split("-")[2].toInt())
+                holidaysList.add(EventDay(calendar, R.drawable.dot_shape))
+            }
+            runOnUiThread { showAllHolidaysOnCalendar() }
         }
         viewModel.nextPublicHolidayResponse.observe(this) { holiday ->
             runOnUiThread { showNextHoliday(holiday) }
@@ -66,9 +74,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showAllHolidaysOnCalendar() {
+        binding.allHolidaysContainer.calendar.setEvents(holidaysList)
+    }
+
     private fun initUI() {
         BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
-            peekHeight = 64
+            peekHeight = 8
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
