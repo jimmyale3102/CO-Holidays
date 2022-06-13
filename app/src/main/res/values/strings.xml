@@ -2,4 +2,6 @@
     <string name="app_name">ColombiaHolidays</string>
     <string name="it_is_holiday">¡It\'s holiday!</string>
     <string name="all_holidays">All holidays</string>
+    <string name="upcoming_holiday">Upcoming holiday is on</string>
+    <string name="next_holiday_for">and it\'s for</string>
 </resources>
