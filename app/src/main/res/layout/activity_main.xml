@@ -81,4 +81,23 @@
 
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/all_holidays_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/top_rounded_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_baseline_remove"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
