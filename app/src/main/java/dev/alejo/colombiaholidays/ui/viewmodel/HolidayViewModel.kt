@@ -26,7 +26,7 @@ class HolidayViewModel @Inject constructor(
     fun onCreate() {
         val currentYear = Calendar.getInstance().get(Calendar.YEAR).toString()
         getHolidayByYear(currentYear)
-        getNextHolidayByYear(currentYear)
+        getNextHolidayByYear()
         viewModelScope.launch {
             getTodayHolidayUseCase().let {
                 todayHolidayResponse.postValue(it)
@@ -34,9 +34,9 @@ class HolidayViewModel @Inject constructor(
         }
     }
 
-    fun getNextHolidayByYear(year: String) {
+    fun getNextHolidayByYear() {
         viewModelScope.launch {
-            val result = getNextPublicHolidayUseCase(year)
+            val result = getNextPublicHolidayUseCase()
             if(result.isNotEmpty())
                 nextPublicHolidayResponse.postValue(result[0])
         }

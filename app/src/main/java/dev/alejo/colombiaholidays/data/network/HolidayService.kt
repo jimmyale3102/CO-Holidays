@@ -21,9 +21,9 @@ class HolidayService @Inject constructor(
         }
     }
 
-    suspend fun getNextPublicaHoliday(year: String): List<HolidayModel> {
+    suspend fun getNextPublicaHoliday(): List<HolidayModel> {
         return withContext(Dispatchers.IO) {
-            val response = api.getNextPublicHoliday(year)
+            val response = api.getNextPublicHoliday()
             response.body() ?: emptyList()
         }
     }

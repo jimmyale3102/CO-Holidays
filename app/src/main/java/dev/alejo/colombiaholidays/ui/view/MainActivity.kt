@@ -29,6 +29,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.holidayByYearResponse.observe(this) { holidays ->
             holidays.forEach { it -> println(it.localName) }
         }
+        viewModel.nextPublicHolidayResponse.observe(this) { holiday ->
+            println("*********************************************************")
+            println(holiday.toString())
+        }
         viewModel.todayHolidayResponse.observe(this) { todayHoliday ->
             runOnUiThread { showTodayHoliday(todayHoliday) }
         }

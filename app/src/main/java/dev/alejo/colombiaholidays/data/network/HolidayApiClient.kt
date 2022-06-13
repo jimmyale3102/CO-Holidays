@@ -16,9 +16,7 @@ interface HolidayApiClient {
         @Path("year") year: String
     ): Response<List<HolidayModel>>
 
-    @GET("NextPublicHolidays/{year}")
-    suspend fun getNextPublicHoliday(
-        @Path("year") year: String
-    ): Response<List<HolidayModel>>
+    @GET("NextPublicHolidays/${Constants.COLOMBIA_CODE}")
+    suspend fun getNextPublicHoliday(): Response<List<HolidayModel>>
 
 }
