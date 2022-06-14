@@ -18,4 +18,11 @@ object DateUtils {
     fun getMonthFromDate(date: Date) = dateFormatter.format(date).split("-")[1].toInt()
     fun getNextHolidayFormatted(dateString: String): String =
         nextHolidayDateFormat.format(getDateFromString(dateString)!!)
+    fun getDateAsInt(dateString: String): Int {
+        val dateFormatted = dateFormatter.format(getDateFromString(dateString)!!)
+        val year = dateFormatted.split("-")[0]
+        val month = dateFormatted.split("-")[1]
+        val day = dateFormatted.split("-")[2]
+        return (year + month + day).toInt()
+    }
 }
