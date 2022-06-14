@@ -18,4 +18,11 @@
     <string name="november">November</string>
     <string name="december">December</string>
     <string name="about">Is a simple app that shows you all the holidays in Colombia.\n\nMade with @ by Jimmy\nWith help from Checho\nInspired by Jahir</string>
+    <string name="days_left">days left</string>
+    <string name="it_is_fixed">It\'s every year on the same date</string>
+    <string name="it_is_global">It\'s in every county</string>
+    <string name="launch_year">Launch year:</string>
+    <string name="public_type">Public</string>
+    <string name="ago">ago</string>
+    <string name="type">Type:</string>
 </resources>

@@ -26,9 +26,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x_large"
+        android:layout_marginTop="@dimen/x_small"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -76,25 +76,27 @@
             android:id="@+id/is_same_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:textAlignment="center"
             android:textSize="22sp"
             android:textColor="@color/turquoise_blue"
-            tools:text="It's every year on the same date"/>
+            android:text="@string/it_is_fixed"/>
 
         <TextView
             android:id="@+id/is_every_county"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:textAlignment="center"
             android:textSize="22sp"
             android:textColor="@color/turquoise_blue"
-            tools:text="It's in every county"/>
+            android:text="@string/it_is_global"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/set_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/medium_large"
+            android:layout_margin="@dimen/medium"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/turquoise_blue"
             android:src="@drawable/ic_notification_on"
@@ -106,7 +108,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/medium"
+        android:layout_marginBottom="@dimen/medium_large"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

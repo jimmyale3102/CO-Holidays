@@ -8,6 +8,6 @@ data class HolidayModel(
     @SerializedName("name") val name: String,
     @SerializedName("fixed") val fixed: Boolean,
     @SerializedName("global") val global: Boolean,
-    @SerializedName("launchYear") val launchYear: Int,
+    @SerializedName("launchYear") val launchYear: Int?,
     @SerializedName("types") val types: List<String>
 )
