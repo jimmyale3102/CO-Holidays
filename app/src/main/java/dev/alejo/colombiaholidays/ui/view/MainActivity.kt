@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initUI() {
         val calendarLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val listLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -118,9 +119,11 @@ class MainActivity : AppCompatActivity() {
             if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {
                 binding.allHolidaysContainer.calendarContent.visibility = View.GONE
                 binding.allHolidaysContainer.listRecycler.visibility = View.VISIBLE
+                binding.contentFormatButton.setImageDrawable(getDrawable(R.drawable.ic_calendar))
             } else {
                 binding.allHolidaysContainer.calendarContent.visibility = View.VISIBLE
                 binding.allHolidaysContainer.listRecycler.visibility = View.GONE
+                binding.contentFormatButton.setImageDrawable(getDrawable(R.drawable.ic_list))
             }
         }
         BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
