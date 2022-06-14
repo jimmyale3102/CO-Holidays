@@ -113,5 +113,6 @@ class AboutActivity : AppCompatActivity() {
         setFullScreen(window)
         lightStatusBar(window, true)
         initAboutDescription()
+        binding.backButton.setOnClickListener { onBackPressed() }
     }
 }
