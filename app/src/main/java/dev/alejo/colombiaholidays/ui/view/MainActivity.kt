@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.applandeo.materialcalendarview.model.EventDay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,10 +14,11 @@ import dev.alejo.colombiaholidays.core.lightStatusBar
 import dev.alejo.colombiaholidays.core.setFullScreen
 import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.ActivityMainBinding
+import dev.alejo.colombiaholidays.ui.adapter.HolidaysAdapter
+import dev.alejo.colombiaholidays.ui.adapter.ListHolidaysAdapter
 import dev.alejo.colombiaholidays.ui.viewmodel.HolidayViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 @SuppressLint("SimpleDateFormat")
 @AndroidEntryPoint
@@ -25,7 +27,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HolidayViewModel by viewModels()
     private val dateFormat by lazy { SimpleDateFormat("EEE, MMM dd") }
-    private val holidaysList = mutableListOf<EventDay>()
+    private val holidaysEventList = mutableListOf<EventDay>()
+    private val holidaysList = mutableListOf<HolidayModel>()
+    private val calendarAdapter by lazy { HolidaysAdapter(holidaysList) }
+    private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +45,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initObservables() {
         viewModel.holidayByYearResponse.observe(this) { holidays ->
+            holidaysList.clear()
+            holidaysList.addAll(holidays)
             holidays.forEach { holiday ->
                 println(holiday.date)
                 val calendar = Calendar.getInstance()
                 calendar.set(Calendar.YEAR, holiday.date.split("-")[0].toInt())
                 calendar.set(Calendar.MONTH, holiday.date.split("-")[1].toInt() - 1)
                 calendar.set(Calendar.DAY_OF_MONTH, holiday.date.split("-")[2].toInt())
-                holidaysList.add(EventDay(calendar, R.drawable.dot_shape))
+                holidaysEventList.add(EventDay(calendar, R.drawable.dot_shape))
             }
             runOnUiThread { showAllHolidaysOnCalendar() }
         }
@@ -74,11 +81,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun showAllHolidaysOnCalendar() {
-        binding.allHolidaysContainer.calendar.setEvents(holidaysList)
+        calendarAdapter.notifyDataSetChanged()
+        holidaysListAdapter.notifyDataSetChanged()
+        binding.allHolidaysContainer.calendar.setEvents(holidaysEventList)
     }
 
     private fun initUI() {
+        val calendarLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val listLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.allHolidaysContainer.calendarRecycler.layoutManager = calendarLayoutManager
+        binding.allHolidaysContainer.calendarRecycler.adapter = calendarAdapter
+        binding.allHolidaysContainer.listRecycler.layoutManager = listLayoutManager
+        binding.allHolidaysContainer.listRecycler.adapter = holidaysListAdapter
         BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
             peekHeight = 8
             this.state = BottomSheetBehavior.STATE_COLLAPSED

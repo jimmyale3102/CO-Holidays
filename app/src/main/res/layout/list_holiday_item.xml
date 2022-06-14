@@ -23,8 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray"
+        android:backgroundTint="@color/light_gray"
+        android:layout_marginTop="@dimen/x_small"
+        android:layout_marginStart="@dimen/x_small"
+        android:layout_marginEnd="@dimen/x_small"
         android:layout_marginBottom="@dimen/medium"
-        app:cardElevation="6dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardElevation="@dimen/x_small"
         app:cardCornerRadius="@dimen/corner">
 
         <LinearLayout
