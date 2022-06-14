@@ -4,4 +4,17 @@
     <string name="all_holidays">All holidays</string>
     <string name="upcoming_holiday">Upcoming holiday is on</string>
     <string name="next_holiday_for">and it\'s for</string>
+    <string name="holidays">Holidays</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
 </resources>

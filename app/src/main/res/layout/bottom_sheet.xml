@@ -11,26 +11,59 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small"
             android:orientation="vertical">
 
-            <com.applandeo.materialcalendarview.CalendarView
-                android:id="@+id/calendar"
+            <LinearLayout
+                android:id="@+id/calendar_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/x_small"
-                app:eventsEnabled="true"
-                app:pagesColor="@color/light_white"
-                app:dayNamesBarColor="@color/light_white"
-                app:headerBackgroundColor="@color/turquoise_blue"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.applandeo.materialcalendarview.CalendarView
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/x_small"
+                    app:dayNamesBarColor="@color/light_white"
+                    app:eventsEnabled="true"
+                    app:headerBackgroundColor="@color/turquoise_blue"
+                    app:pagesColor="@color/light_white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium"
+                    android:layout_marginTop="@dimen/medium"
+                    android:text="@string/holidays"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium"
+                    android:layout_marginTop="@dimen/medium"
+                    android:layout_marginEnd="@dimen/medium" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginTop="@dimen/medium"
+                android:layout_marginEnd="@dimen/medium" />
 
         </LinearLayout>
 
