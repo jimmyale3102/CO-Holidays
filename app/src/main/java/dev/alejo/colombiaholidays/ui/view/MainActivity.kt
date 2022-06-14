@@ -1,6 +1,7 @@
 package dev.alejo.colombiaholidays.ui.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -129,6 +130,9 @@ class MainActivity : AppCompatActivity() {
         BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
             peekHeight = 8
             this.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+        binding.aboutButton.setOnClickListener {
+            startActivity(Intent(this, AboutActivity::class.java))
         }
     }
 }

@@ -14,8 +14,9 @@
         android:layout_height="50dp"
         android:background="@color/light_gray"
         android:src="@drawable/ic_back"
+        android:layout_marginTop="@dimen/medium_large"
+        android:layout_marginStart="@dimen/small"
         app:elevation="0dp"
-        app:useCompatPadding="true"
         app:tint="@color/turquoise_blue"
         app:fabCustomSize="50dp"
         app:fabSize="mini"
@@ -27,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="@dimen/medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +50,9 @@
             android:layout_marginTop="@dimen/medium"
             android:textAlignment="center"
             android:text="@string/about"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:autoLink="all"/>
 
     </LinearLayout>
 

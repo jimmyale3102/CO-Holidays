@@ -9,5 +9,8 @@ class Constants {
         const val CODE_204 = 204
         const val CODE_204_RESPONSE = "Today is not a public holiday"
         const val CODE_400_RESPONSE = "Validation failure"
+        const val JIMMY_URL = "https://twitter.com/jimmyale3201"
+        const val CHECHO_URL = "https://sarl.netlify.app/"
+        const val JAHIR_URL = "https://jahir.dev/"
     }
 }
