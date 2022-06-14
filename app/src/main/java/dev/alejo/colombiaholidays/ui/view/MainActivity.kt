@@ -2,6 +2,7 @@ package dev.alejo.colombiaholidays.ui.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -95,6 +96,15 @@ class MainActivity : AppCompatActivity() {
         binding.allHolidaysContainer.calendarRecycler.adapter = calendarAdapter
         binding.allHolidaysContainer.listRecycler.layoutManager = listLayoutManager
         binding.allHolidaysContainer.listRecycler.adapter = holidaysListAdapter
+        binding.contentFormatButton.setOnClickListener {
+            if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {
+                binding.allHolidaysContainer.calendarContent.visibility = View.GONE
+                binding.allHolidaysContainer.listRecycler.visibility = View.VISIBLE
+            } else {
+                binding.allHolidaysContainer.calendarContent.visibility = View.VISIBLE
+                binding.allHolidaysContainer.listRecycler.visibility = View.GONE
+            }
+        }
         BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
             peekHeight = 8
             this.state = BottomSheetBehavior.STATE_COLLAPSED
