@@ -8,7 +8,6 @@ import dev.alejo.colombiaholidays.R
 import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.ListHolidayItemBinding
-import java.text.SimpleDateFormat
 
 @SuppressLint("SimpleDateFormat")
 class ListHolidaysViewHolder(
@@ -20,8 +19,8 @@ class ListHolidaysViewHolder(
         dateFormatted?.let {
             val day = DateUtils.getDayFromDate(dateFormatted)
             val dayName = DateUtils.getDayNameFromDate(dateFormatted)
-            binding.day.text = day
-            binding.dayName.text = dayName
+            binding.holidayItem.day.text = day
+            binding.holidayItem.dayName.text = dayName
         }
         if(showMonth) {
             binding.monthName.text = when(currentMonth) {
@@ -41,6 +40,6 @@ class ListHolidaysViewHolder(
             }
             binding.monthName.visibility = View.VISIBLE
         }
-        binding.holiday.text = holiday.localName
+        binding.holidayItem.holiday.text = holiday.localName
     }
 }
