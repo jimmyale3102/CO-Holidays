@@ -3,6 +3,7 @@ package dev.alejo.colombiaholidays.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.HolidayItemBinding
 

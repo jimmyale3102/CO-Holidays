@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import dev.alejo.colombiaholidays.R
+import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.ListHolidayItemBinding
 import java.text.SimpleDateFormat
@@ -14,12 +15,14 @@ class ListHolidaysViewHolder(
     private val binding: ListHolidayItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private val dateFormat = SimpleDateFormat("EEE dd")
-
     fun bind(context: Context, holiday: HolidayModel, showMonth: Boolean, currentMonth: Int) {
-        val dateFormatted = SimpleDateFormat("yyyy-MM-dd").parse(holiday.date)
-        val day = dateFormat.format(dateFormatted!!).split(" ")[1]
-        val dayName = dateFormat.format(dateFormatted).split(" ")[0]
+        val dateFormatted = DateUtils.getDateFromString(holiday.date)
+        dateFormatted?.let {
+            val day = DateUtils.getDayFromDate(dateFormatted)
+            val dayName = DateUtils.getDayNameFromDate(dateFormatted)
+            binding.day.text = day
+            binding.dayName.text = dayName
+        }
         if(showMonth) {
             binding.monthName.text = when(currentMonth) {
                 1 -> context.getString(R.string.january)
@@ -39,7 +42,5 @@ class ListHolidaysViewHolder(
             binding.monthName.visibility = View.VISIBLE
         }
         binding.holiday.text = holiday.localName
-        binding.day.text = day
-        binding.dayName.text = dayName
     }
 }

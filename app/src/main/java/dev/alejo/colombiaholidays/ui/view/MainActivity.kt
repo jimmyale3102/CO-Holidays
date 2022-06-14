@@ -2,6 +2,7 @@ package dev.alejo.colombiaholidays.ui.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.R
 import dev.alejo.colombiaholidays.core.Constants.Companion.CODE_200_RESPONSE
+import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.core.lightStatusBar
 import dev.alejo.colombiaholidays.core.setFullScreen
 import dev.alejo.colombiaholidays.data.model.HolidayModel
@@ -18,19 +20,19 @@ import dev.alejo.colombiaholidays.databinding.ActivityMainBinding
 import dev.alejo.colombiaholidays.ui.adapter.HolidaysAdapter
 import dev.alejo.colombiaholidays.ui.adapter.ListHolidaysAdapter
 import dev.alejo.colombiaholidays.ui.viewmodel.HolidayViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
-@SuppressLint("SimpleDateFormat")
+@SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HolidayViewModel by viewModels()
-    private val dateFormat by lazy { SimpleDateFormat("EEE, MMM dd") }
     private val holidaysEventList = mutableListOf<EventDay>()
     private val holidaysList = mutableListOf<HolidayModel>()
-    private val calendarAdapter by lazy { HolidaysAdapter(holidaysList) }
+    private val calendarHolidaysList = mutableListOf<HolidayModel>()
+    private var currentCalendarMonth = 0
+    private val calendarAdapter by lazy { HolidaysAdapter(calendarHolidaysList) }
     private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,21 +74,31 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun showNextHoliday(nextHoliday: HolidayModel) {
-        val holidayDate = SimpleDateFormat("yyyy-MM-dd").parse(nextHoliday.date)
-        val dateFormatted = holidayDate?.let { date ->
-            dateFormat.format(date)
-        }
         if(binding.holiday.text.isEmpty() || binding.holiday.text != CODE_200_RESPONSE) {
             binding.holidayDescription.text = getString(R.string.upcoming_holiday) +
-                " $dateFormatted ${getString(R.string.next_holiday_for)} ${nextHoliday.localName}"
+                " ${DateUtils.getNextHolidayFormatted(nextHoliday.date)} " +
+                "${getString(R.string.next_holiday_for)} ${nextHoliday.localName}"
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun showAllHolidaysOnCalendar() {
-        calendarAdapter.notifyDataSetChanged()
+        updateMonthHolidays()
         holidaysListAdapter.notifyDataSetChanged()
         binding.allHolidaysContainer.calendar.setEvents(holidaysEventList)
+    }
+
+    private fun updateMonthHolidays() {
+        val calendarMonth = DateUtils.getMonthFromDate(
+            binding.allHolidaysContainer.calendar.currentPageDate.time
+        )
+        if(calendarMonth != currentCalendarMonth) {
+            currentCalendarMonth = calendarMonth
+            calendarHolidaysList.clear()
+            calendarHolidaysList.addAll(
+                holidaysList.filter { DateUtils.getMonthNumber(it.date) == currentCalendarMonth }
+            )
+            calendarAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun initUI() {
@@ -96,6 +108,12 @@ class MainActivity : AppCompatActivity() {
         binding.allHolidaysContainer.calendarRecycler.adapter = calendarAdapter
         binding.allHolidaysContainer.listRecycler.layoutManager = listLayoutManager
         binding.allHolidaysContainer.listRecycler.adapter = holidaysListAdapter
+        binding.allHolidaysContainer.calendar.setOnForwardPageChangeListener {
+            updateMonthHolidays()
+        }
+        binding.allHolidaysContainer.calendar.setOnPreviousPageChangeListener {
+            updateMonthHolidays()
+        }
         binding.contentFormatButton.setOnClickListener {
             if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {
                 binding.allHolidaysContainer.calendarContent.visibility = View.GONE
