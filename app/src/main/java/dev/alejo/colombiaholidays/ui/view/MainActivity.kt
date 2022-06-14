@@ -3,7 +3,6 @@ package dev.alejo.colombiaholidays.ui.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private val holidaysList = mutableListOf<HolidayModel>()
     private val calendarHolidaysList = mutableListOf<HolidayModel>()
     private var currentCalendarMonth = 0
-    private val calendarAdapter by lazy { HolidaysAdapter(calendarHolidaysList) }
+    private val calendarAdapter by lazy { HolidaysAdapter(this, calendarHolidaysList) }
     private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,5 +133,9 @@ class MainActivity : AppCompatActivity() {
         binding.aboutButton.setOnClickListener {
             startActivity(Intent(this, AboutActivity::class.java))
         }
+    }
+
+    companion object {
+        var holidaySelected: HolidayModel? = null
     }
 }

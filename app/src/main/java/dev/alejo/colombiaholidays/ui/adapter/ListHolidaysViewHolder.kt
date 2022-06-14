@@ -2,12 +2,15 @@ package dev.alejo.colombiaholidays.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import dev.alejo.colombiaholidays.R
 import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.ListHolidayItemBinding
+import dev.alejo.colombiaholidays.ui.view.HolidayDetailActivity
+import dev.alejo.colombiaholidays.ui.view.MainActivity.Companion.holidaySelected
 
 @SuppressLint("SimpleDateFormat")
 class ListHolidaysViewHolder(
@@ -41,5 +44,9 @@ class ListHolidaysViewHolder(
             binding.monthName.visibility = View.VISIBLE
         }
         binding.holidayItem.holiday.text = holiday.localName
+        binding.holidayItem.holidayContainer.setOnClickListener {
+            holidaySelected = holiday
+            context.startActivity(Intent(context, HolidayDetailActivity::class.java))
+        }
     }
 }

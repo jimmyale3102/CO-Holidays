@@ -1,5 +1,6 @@
 package dev.alejo.colombiaholidays.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,7 @@ import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.HolidayItemBinding
 
 class HolidaysAdapter(
+    private val context: Context,
     private val holidaysList: List<HolidayModel>
 ): RecyclerView.Adapter<HolidaysViewHolder>() {
 
@@ -21,7 +23,7 @@ class HolidaysAdapter(
     }
 
     override fun onBindViewHolder(holder: HolidaysViewHolder, position: Int) {
-        holder.bind(holidaysList[position])
+        holder.bind(context, holidaysList[position])
     }
 
     override fun getItemCount(): Int = holidaysList.size

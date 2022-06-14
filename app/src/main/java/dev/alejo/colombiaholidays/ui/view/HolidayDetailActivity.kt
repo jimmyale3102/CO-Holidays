@@ -8,7 +8,13 @@ class HolidayDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHolidayDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = ActivityHolidayDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initUI()
+    }
+
+    private fun initUI() {
+        binding.backButton.setOnClickListener { onBackPressed() }
     }
 }
