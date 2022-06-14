@@ -17,6 +17,9 @@
         android:theme="@style/Theme.ColombiaHolidays"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.HolidayDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.AboutActivity"
             android:exported="false" />
         <activity
