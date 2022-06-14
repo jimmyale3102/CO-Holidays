@@ -7,22 +7,45 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.alejo.colombiaholidays.core.Constants
 import dev.alejo.colombiaholidays.core.Constants.Companion.MESSAGE_EXTRA
-import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID
 import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
 import dev.alejo.colombiaholidays.core.Notification
+import dev.alejo.colombiaholidays.domain.GetHolidayNotificationUseCase
+import dev.alejo.colombiaholidays.domain.InsertHolidayNotificationUseCase
+import dev.alejo.colombiaholidays.domain.model.HolidayNotificationItem
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-//@HiltViewModel
-class HolidayDetailViewModel: ViewModel() {
+@HiltViewModel
+class HolidayDetailViewModel @Inject constructor(
+    private val getHolidaysNotificationsUseCase: GetHolidayNotificationUseCase,
+    private val insertHolidayNotificationUseCase: InsertHolidayNotificationUseCase
+): ViewModel() {
 
-    fun onCreate(context: Context) {
+    val holidayNotificationResponse = MutableLiveData<HolidayNotificationItem?>()
+
+    fun onCreate(context: Context, holidayNotificationId: Int) {
         createNotificationChannel(context)
+        getHolidaysNotifications(holidayNotificationId)
+    }
+
+    private fun getHolidaysNotifications(holidayNotificationId: Int) {
+        viewModelScope.launch {
+            val holidayNotification = getHolidaysNotificationsUseCase(holidayNotificationId)
+            holidayNotificationResponse.postValue(holidayNotification)
+        }
+    }
+
+    fun insertHolidayNotification(holidayNotification: HolidayNotificationItem) {
+        viewModelScope.launch {
+            insertHolidayNotificationUseCase(holidayNotification)
+        }
     }
 
     private fun createNotificationChannel(context: Context) {

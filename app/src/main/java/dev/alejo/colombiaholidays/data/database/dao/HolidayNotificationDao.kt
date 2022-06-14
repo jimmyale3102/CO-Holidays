@@ -9,8 +9,8 @@ import dev.alejo.colombiaholidays.data.database.entities.HolidayNotificationEnti
 @Dao
 interface HolidayNotificationDao {
 
-    @Query("SELECT * FROM holiday_notification")
-    suspend fun getHolidaysNotifications(): List<HolidayNotificationEntity>
+    @Query("SELECT * FROM holiday_notification WHERE id = :id")
+    suspend fun getHolidayNotification(id: Int): HolidayNotificationEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHolidayNotification(holidayNotification: HolidayNotificationEntity)

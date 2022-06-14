@@ -1,43 +1,39 @@
 package dev.alejo.colombiaholidays.ui.view
 
 import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.R
-import dev.alejo.colombiaholidays.core.Constants.Companion.CHANNEL_ID
-import dev.alejo.colombiaholidays.core.Constants.Companion.MESSAGE_EXTRA
-import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID
 import dev.alejo.colombiaholidays.core.DateUtils
-import dev.alejo.colombiaholidays.core.Notification
+import dev.alejo.colombiaholidays.core.extensions.snack
 import dev.alejo.colombiaholidays.core.lightStatusBar
 import dev.alejo.colombiaholidays.core.setFullScreen
 import dev.alejo.colombiaholidays.databinding.ActivityHolidayDetailBinding
+import dev.alejo.colombiaholidays.domain.model.HolidayNotificationItem
 import dev.alejo.colombiaholidays.ui.viewmodel.HolidayDetailViewModel
 import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
+@AndroidEntryPoint
 class HolidayDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHolidayDetailBinding
     private val holidaySelected by lazy { MainActivity.holidaySelected }
     private val viewModel: HolidayDetailViewModel by viewModels()
+    private val holidayNotificationId by lazy { DateUtils.getDateAsInt(holidaySelected!!.date) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHolidayDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel.onCreate(this)
+        viewModel.onCreate(this, holidayNotificationId)
         initUI()
+        initObservables()
         showData()
     }
 
@@ -69,15 +65,23 @@ class HolidayDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun initObservables() {
+        viewModel.holidayNotificationResponse.observe(this) { holidayNotification ->
+            Log.e("Notification->", holidayNotification?.toString() ?: "It's Null")
+        }
+    }
+
     private fun initUI() {
         setFullScreen(window)
         lightStatusBar(window, true)
         binding.setNotification.setOnClickListener {
             viewModel.scheduleNotification(
                 applicationContext,
-                DateUtils.getDateAsInt(holidaySelected!!.date),
+                holidayNotificationId,
                 holidaySelected?.name ?: ""
             )
+            viewModel.insertHolidayNotification(HolidayNotificationItem(holidayNotificationId))
+            //snack(binding.root, R.string.notification_created)
         }
         binding.backButton.setOnClickListener { onBackPressed() }
     }
