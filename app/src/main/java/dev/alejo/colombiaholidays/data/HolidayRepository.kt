@@ -3,7 +3,6 @@ package dev.alejo.colombiaholidays.data
 import dev.alejo.colombiaholidays.core.extensions.toDatabase
 import dev.alejo.colombiaholidays.core.extensions.toDomain
 import dev.alejo.colombiaholidays.data.database.dao.HolidayNotificationDao
-import dev.alejo.colombiaholidays.data.database.entities.HolidayNotificationEntity
 import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.data.network.HolidayService
 import dev.alejo.colombiaholidays.domain.model.HolidayNotificationItem

@@ -14,15 +14,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.alejo.colombiaholidays.core.Constants
 import dev.alejo.colombiaholidays.core.Constants.Companion.MESSAGE_EXTRA
 import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
-import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.core.Notification
 import dev.alejo.colombiaholidays.domain.GetHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.InsertHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.RemoveHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.model.HolidayNotificationItem
 import kotlinx.coroutines.launch
-import java.util.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
