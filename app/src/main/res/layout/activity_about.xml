@@ -54,6 +54,26 @@
             android:textStyle="italic"
             android:autoLink="all"/>
 
+        <TextView
+            android:id="@+id/pictures_credits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/pictures_credits"
+            android:textStyle="italic"
+            android:autoLink="all"/>
+
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/medium_large"
+        android:textAlignment="center"
+        android:text="@string/app_version"
+        android:textStyle="italic"
+        android:autoLink="all"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

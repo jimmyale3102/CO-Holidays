@@ -19,6 +19,7 @@
     <string name="november">Noviembre</string>
     <string name="december">Diciembre</string>
     <string name="about">Es una aplicación sencilla que muestra todos los festivos en Colombia y alguna información sobre cada uno. Además con la opción de poder agregar una notificación por cada festivo\n\nHecho con @ por Jimmy\nCon ayuda de Checho\nInspirado por Jahir</string>
+    <string name="pictures_credits">Las imágenes son de Pixels</string>
     <string name="days_left">Faltan</string>
     <string name="it_is_fixed">Este festivo es cada año en la misma fecha</string>
     <string name="it_is_global">Este festivo es en cada región</string>

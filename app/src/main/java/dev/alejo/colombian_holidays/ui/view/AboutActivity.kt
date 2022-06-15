@@ -18,6 +18,7 @@ import dev.alejo.colombian_holidays.R
 import dev.alejo.colombian_holidays.core.Constants.Companion.CHECHO_URL
 import dev.alejo.colombian_holidays.core.Constants.Companion.JAHIR_URL
 import dev.alejo.colombian_holidays.core.Constants.Companion.JIMMY_URL
+import dev.alejo.colombian_holidays.core.Constants.Companion.PICTURES_URL
 import dev.alejo.colombian_holidays.core.lightStatusBar
 import dev.alejo.colombian_holidays.core.setFullScreen
 import dev.alejo.colombian_holidays.databinding.ActivityAboutBinding
@@ -104,9 +105,31 @@ class AboutActivity : AppCompatActivity() {
             jahirLastIndex,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+
+        val picturesSpannableString = SpannableString(getString(R.string.pictures_credits))
+        val picturesClickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(p0: View) {
+                startIntent(PICTURES_URL)
+            }
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = ContextCompat.getColor(this@AboutActivity, R.color.turquoise_blue)
+            }
+        }
+        val picturesStartIndex = picturesSpannableString.indexOf("Pixels")
+        val picturesLastIndex = picturesStartIndex + "Pixels".length
+        picturesSpannableString.setSpan(
+            picturesClickableSpan,
+            picturesStartIndex,
+            picturesLastIndex,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         binding.description.text = spannableString
         binding.description.movementMethod = LinkMovementMethod.getInstance()
         binding.description.highlightColor = Color.TRANSPARENT
+        binding.picturesCredits.text = picturesSpannableString
+        binding.picturesCredits.movementMethod = LinkMovementMethod.getInstance()
+        binding.picturesCredits.highlightColor = Color.TRANSPARENT
     }
 
     private fun initUI() {
