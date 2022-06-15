@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "dev.alejo.colombiaholidays"
+        applicationId 'dev.alejo.colombian_holidays'
         minSdk 28
         targetSdk 32
         versionCode 1
