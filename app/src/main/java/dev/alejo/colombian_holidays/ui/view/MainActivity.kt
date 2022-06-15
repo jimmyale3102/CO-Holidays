@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             holidaysList.addAll(holidays)
             holidaysEventList.clear()
             holidays.forEach { holiday ->
-                println(holiday.date)
                 val calendar = Calendar.getInstance()
                 calendar.set(Calendar.YEAR, holiday.date.split("-")[0].toInt())
                 calendar.set(Calendar.MONTH, holiday.date.split("-")[1].toInt() - 1)
