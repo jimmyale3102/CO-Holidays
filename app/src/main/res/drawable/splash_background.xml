@@ -5,7 +5,7 @@
     <item android:drawable="@color/turquoise_blue"/>
     <item>
         <bitmap
-            android:src="@drawable/ic_splash"
+            android:src="@drawable/splash_icon"
             android:gravity="center"/>
 
     </item>

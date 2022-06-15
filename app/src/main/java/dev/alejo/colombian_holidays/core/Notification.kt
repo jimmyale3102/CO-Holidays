@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import dev.alejo.colombian_holidays.R
 import dev.alejo.colombian_holidays.core.Constants.Companion.CHANNEL_ID
 import dev.alejo.colombian_holidays.core.Constants.Companion.MESSAGE_EXTRA
 import dev.alejo.colombian_holidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
@@ -18,7 +19,7 @@ class Notification: BroadcastReceiver() {
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onReceive(context: Context?, intent: Intent?) {
         val notification = NotificationCompat.Builder(context!!, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.ic_menu_report_image)
+            .setSmallIcon(R.mipmap.ic_launcher_round)
             .setContentTitle(NOTIFICATION_TITLE)
             .setContentText(intent?.getStringExtra(MESSAGE_EXTRA))
             .build()

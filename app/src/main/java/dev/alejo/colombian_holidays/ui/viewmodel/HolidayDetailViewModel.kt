@@ -20,6 +20,7 @@ import dev.alejo.colombian_holidays.domain.InsertHolidayNotificationUseCase
 import dev.alejo.colombian_holidays.domain.RemoveHolidayNotificationUseCase
 import dev.alejo.colombian_holidays.domain.model.HolidayNotificationItem
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -88,7 +89,7 @@ class HolidayDetailViewModel @Inject constructor(
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                time,
+                System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(1),
                 pendingIntent
             )
         }

@@ -52,10 +52,11 @@ class HolidayDetailActivity : AppCompatActivity() {
                 val daysDifference = TimeUnit.MILLISECONDS.toDays(
                     holidayDate.time - System.currentTimeMillis()
                 )
-                val daysFormatted = if(daysDifference > 0) {
+                if(daysDifference < 0)
+                    binding.setNotification.visibility = View.GONE
+                val daysFormatted = if(daysDifference >= 0) {
                     daysDifference + 1
                 } else {
-                    binding.setNotification.visibility = View.GONE
                     daysDifference.absoluteValue
                 }
                 binding.daysLeft.text = if (Locale.getDefault().language.contentEquals("en"))
