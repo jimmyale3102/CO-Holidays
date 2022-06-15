@@ -17,6 +17,7 @@ object DateUtils {
     fun getDayNameFromDate(date: Date): String = dateFormat.format(date).split(" ")[0]
     fun getMonthNumber(dateString: String): Int = dateString.split("-")[1].toInt()
     fun getMonthFromDate(date: Date) = dateFormatter.format(date).split("-")[1].toInt()
+    fun getYearFromDate(date: Date) = dateFormatter.format(date).split("-")[0].toInt()
     fun getNextHolidayFormatted(dateString: String): String =
         nextHolidayDateFormat.format(getDateFromString(dateString)!!)
     fun getDateAsInt(dateString: String): Int {

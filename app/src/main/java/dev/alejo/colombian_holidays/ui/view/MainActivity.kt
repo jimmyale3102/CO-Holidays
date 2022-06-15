@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private val holidaysList = mutableListOf<HolidayModel>()
     private val calendarHolidaysList = mutableListOf<HolidayModel>()
     private var currentCalendarMonth = 0
+    private var currentCalendarYear = 0
     private val calendarAdapter by lazy { HolidaysAdapter(this, calendarHolidaysList) }
     private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
 
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.holidayByYearResponse.observe(this) { holidays ->
             holidaysList.clear()
             holidaysList.addAll(holidays)
+            holidaysEventList.clear()
             holidays.forEach { holiday ->
                 println(holiday.date)
                 val calendar = Calendar.getInstance()
@@ -112,6 +114,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun validateCurrentYear() {
+        val calendarYear = DateUtils.getYearFromDate(
+            binding.allHolidaysContainer.calendar.currentPageDate.time
+        )
+        if(calendarYear != currentCalendarYear) {
+            currentCalendarYear = calendarYear
+            calendarHolidaysList.clear()
+            viewModel.getHolidayByYear(currentCalendarYear.toString())
+        }
+        updateMonthHolidays()
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun initUI() {
         val calendarLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -121,10 +135,10 @@ class MainActivity : AppCompatActivity() {
         binding.allHolidaysContainer.listRecycler.layoutManager = listLayoutManager
         binding.allHolidaysContainer.listRecycler.adapter = holidaysListAdapter
         binding.allHolidaysContainer.calendar.setOnForwardPageChangeListener {
-            updateMonthHolidays()
+            validateCurrentYear()
         }
         binding.allHolidaysContainer.calendar.setOnPreviousPageChangeListener {
-            updateMonthHolidays()
+            validateCurrentYear()
         }
         binding.contentFormatButton.setOnClickListener {
             if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {
