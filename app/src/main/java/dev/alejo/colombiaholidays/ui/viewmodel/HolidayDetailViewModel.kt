@@ -17,6 +17,7 @@ import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
 import dev.alejo.colombiaholidays.core.Notification
 import dev.alejo.colombiaholidays.domain.GetHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.InsertHolidayNotificationUseCase
+import dev.alejo.colombiaholidays.domain.RemoveHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.model.HolidayNotificationItem
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -25,10 +26,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HolidayDetailViewModel @Inject constructor(
     private val getHolidaysNotificationsUseCase: GetHolidayNotificationUseCase,
-    private val insertHolidayNotificationUseCase: InsertHolidayNotificationUseCase
+    private val insertHolidayNotificationUseCase: InsertHolidayNotificationUseCase,
+    private val removeHolidayNotificationUseCase: RemoveHolidayNotificationUseCase
 ): ViewModel() {
 
     val holidayNotificationResponse = MutableLiveData<HolidayNotificationItem?>()
+    val existHolidayNotification = MutableLiveData<Boolean>(false)
 
     fun onCreate(context: Context, holidayNotificationId: Int) {
         createNotificationChannel(context)
@@ -39,12 +42,21 @@ class HolidayDetailViewModel @Inject constructor(
         viewModelScope.launch {
             val holidayNotification = getHolidaysNotificationsUseCase(holidayNotificationId)
             holidayNotificationResponse.postValue(holidayNotification)
+            existHolidayNotification.postValue(holidayNotification != null)
         }
     }
 
     fun insertHolidayNotification(holidayNotification: HolidayNotificationItem) {
         viewModelScope.launch {
             insertHolidayNotificationUseCase(holidayNotification)
+            existHolidayNotification.postValue(true)
+        }
+    }
+
+    fun removeHolidayNotification(holidayNotificationId: Int) {
+        viewModelScope.launch {
+            removeHolidayNotificationUseCase(holidayNotificationId)
+            existHolidayNotification.postValue(false)
         }
     }
 

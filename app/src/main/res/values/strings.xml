@@ -25,4 +25,6 @@
     <string name="public_type">Public</string>
     <string name="ago">ago</string>
     <string name="type">Type:</string>
+    <string name="notification_scheduled">Notification scheduled</string>
+    <string name="notification_removed">Notification removed</string>
 </resources>

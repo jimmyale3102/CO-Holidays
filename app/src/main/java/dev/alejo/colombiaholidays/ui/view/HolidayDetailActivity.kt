@@ -1,11 +1,14 @@
 package dev.alejo.colombiaholidays.ui.view
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.R
@@ -71,17 +74,43 @@ class HolidayDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun removeNotification() {
+        viewModel.removeHolidayNotification(holidayNotificationId)
+        binding.setNotification.backgroundTintList =
+            ColorStateList.valueOf(getColor(R.color.light_gray))
+        binding.setNotification.setImageDrawable(
+            ContextCompat.getDrawable(this, R.drawable.ic_notification_off)
+        )
+        binding.setNotification.imageTintList =
+            ColorStateList.valueOf(getColor(R.color.turquoise_blue))
+        snack(binding.root, R.string.notification_removed)
+    }
+
+    private fun insertNotification() {
+        viewModel.scheduleNotification(
+            applicationContext,
+            holidayNotificationId,
+            holidaySelected?.name ?: ""
+        )
+        viewModel.insertHolidayNotification(HolidayNotificationItem(holidayNotificationId))
+        binding.setNotification.backgroundTintList =
+            ColorStateList.valueOf(getColor(R.color.turquoise_blue))
+        binding.setNotification.setImageDrawable(
+            ContextCompat.getDrawable(this, R.drawable.ic_notification_on)
+        )
+        binding.setNotification.imageTintList =
+            ColorStateList.valueOf(getColor(R.color.light_gray))
+        snack(binding.root, R.string.notification_scheduled)
+    }
+
     private fun initUI() {
         setFullScreen(window)
         lightStatusBar(window, true)
         binding.setNotification.setOnClickListener {
-            viewModel.scheduleNotification(
-                applicationContext,
-                holidayNotificationId,
-                holidaySelected?.name ?: ""
-            )
-            viewModel.insertHolidayNotification(HolidayNotificationItem(holidayNotificationId))
-            //snack(binding.root, R.string.notification_created)
+            if(viewModel.existHolidayNotification.value!!)
+                removeNotification()
+            else
+                insertNotification()
         }
         binding.backButton.setOnClickListener { onBackPressed() }
     }

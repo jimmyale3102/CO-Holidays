@@ -9,6 +9,7 @@ import dev.alejo.colombiaholidays.R
 import dev.alejo.colombiaholidays.core.Constants.Companion.CHANNEL_ID
 import dev.alejo.colombiaholidays.core.Constants.Companion.MESSAGE_EXTRA
 import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID
+import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
 
 class Notification: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -18,6 +19,9 @@ class Notification: BroadcastReceiver() {
             .setContentText(intent?.getStringExtra(MESSAGE_EXTRA))
             .build()
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify(NOTIFICATION_ID, notification)
+        manager.notify(
+            intent?.getIntExtra(NOTIFICATION_ID_EXTRA, 0) ?: 0,
+            notification
+        )
     }
 }
