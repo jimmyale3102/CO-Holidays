@@ -2,14 +2,12 @@ package dev.alejo.colombiaholidays.ui.view
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.R
 import dev.alejo.colombiaholidays.core.DateUtils
@@ -88,10 +86,12 @@ class HolidayDetailActivity : AppCompatActivity() {
     }
 
     private fun insertNotification() {
+        val notificationTime = DateUtils.getTimeFromString(holidaySelected!!.date)
         viewModel.scheduleNotification(
             applicationContext,
             holidayNotificationId,
-            holidaySelected?.localName ?: ""
+            holidaySelected?.localName ?: "",
+            notificationTime
         )
         viewModel.insertHolidayNotification(HolidayNotificationItem(holidayNotificationId))
         turnNotificationButtonOn()

@@ -1,6 +1,7 @@
 package dev.alejo.colombiaholidays.core
 
 import android.annotation.SuppressLint
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,5 +25,16 @@ object DateUtils {
         val month = dateFormatted.split("-")[1]
         val day = dateFormatted.split("-")[2]
         return (year + month + day).toInt()
+    }
+    fun getTimeFromString(dateString: String): Long {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.SECOND, 1)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.HOUR, 0)
+        calendar.set(Calendar.DAY_OF_MONTH, dateString.split("-")[2].toInt())
+        calendar.set(Calendar.MONTH, dateString.split("-")[1].toInt() - 1)
+        calendar.set(Calendar.YEAR, dateString.split("-")[0].toInt())
+        Log.e("Time->", dateFormatter.format(calendar.time))
+        return calendar.timeInMillis
     }
 }

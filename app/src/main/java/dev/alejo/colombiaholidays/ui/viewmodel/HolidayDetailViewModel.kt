@@ -14,12 +14,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.alejo.colombiaholidays.core.Constants
 import dev.alejo.colombiaholidays.core.Constants.Companion.MESSAGE_EXTRA
 import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
+import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.core.Notification
 import dev.alejo.colombiaholidays.domain.GetHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.InsertHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.RemoveHolidayNotificationUseCase
 import dev.alejo.colombiaholidays.domain.model.HolidayNotificationItem
 import kotlinx.coroutines.launch
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -74,7 +76,7 @@ class HolidayDetailViewModel @Inject constructor(
         }
     }
 
-    fun scheduleNotification(context: Context, notificationId: Int, message: String) {
+    fun scheduleNotification(context: Context, notificationId: Int, message: String, time: Long) {
         viewModelScope.launch {
             val intent = Intent(context, Notification::class.java).apply {
                 putExtra(MESSAGE_EXTRA, message)
@@ -89,11 +91,12 @@ class HolidayDetailViewModel @Inject constructor(
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(10),
+                time,
                 pendingIntent
             )
         }
     }
+    //System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(10)
 
     fun removeNotification(context: Context, notificationId: Int) {
         viewModelScope.launch {
