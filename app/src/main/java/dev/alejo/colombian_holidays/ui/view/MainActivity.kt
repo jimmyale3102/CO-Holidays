@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applandeo.materialcalendarview.model.EventDay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -38,6 +39,21 @@ class MainActivity : AppCompatActivity() {
     private var currentCalendarYear = 0
     private val calendarAdapter by lazy { HolidaysAdapter(this, calendarHolidaysList) }
     private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
+    private val backgroundDrawables = arrayListOf(
+        R.drawable.background_1,
+        R.drawable.background_2,
+        R.drawable.background_3,
+        R.drawable.background_4,
+        R.drawable.background_5,
+        R.drawable.background_6,
+        R.drawable.background_7,
+        R.drawable.background_8,
+        R.drawable.background_9,
+        R.drawable.background_10,
+        R.drawable.background_11,
+        R.drawable.background_12,
+        R.drawable.background_13,
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,6 +144,12 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun initUI() {
+        binding.backgroundDrawable.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                backgroundDrawables[(0 until backgroundDrawables.size).random()]
+            )
+        )
         val calendarLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val listLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.allHolidaysContainer.calendarRecycler.layoutManager = calendarLayoutManager

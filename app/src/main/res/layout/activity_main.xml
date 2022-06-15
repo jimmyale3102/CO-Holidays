@@ -9,11 +9,12 @@
     tools:context=".ui.view.MainActivity">
 
     <ImageView
+        android:id="@+id/background_drawable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:alpha="0.2"
-        app:srcCompat="@drawable/sad_boy"
+        app:srcCompat="@drawable/background_1"
         tools:ignore="ContentDescription" />
 
     <ImageButton
