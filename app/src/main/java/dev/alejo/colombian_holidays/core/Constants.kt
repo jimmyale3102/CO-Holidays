@@ -12,8 +12,7 @@ class Constants {
         const val JIMMY_URL = "https://twitter.com/jimmyale3201"
         const val CHECHO_URL = "https://sarl.netlify.app/"
         const val JAHIR_URL = "https://jahir.dev/"
-        const val NOTIFICATION_ID = 1
-        const val CHANNEL_ID = "colombian_holidays_channel"
+        const val CHANNEL_ID = "colombian_holidays_notifications_channel"
         const val NOTIFICATION_TITLE = "¡It's holiday!"
         const val MESSAGE_EXTRA = "messageExtra"
         const val NOTIFICATION_ID_EXTRA = "notificationIdExtra"

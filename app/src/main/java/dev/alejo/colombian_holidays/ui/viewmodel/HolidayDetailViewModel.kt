@@ -6,11 +6,16 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.RingtoneManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.alejo.colombian_holidays.R
 import dev.alejo.colombian_holidays.core.Constants
 import dev.alejo.colombian_holidays.core.Constants.Companion.MESSAGE_EXTRA
 import dev.alejo.colombian_holidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
@@ -22,6 +27,7 @@ import dev.alejo.colombian_holidays.domain.model.HolidayNotificationItem
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
 
 @HiltViewModel
 class HolidayDetailViewModel @Inject constructor(
@@ -65,8 +71,16 @@ class HolidayDetailViewModel @Inject constructor(
             val name = "Notification Channel"
             val description = "Channel description"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .build()
             val channel = NotificationChannel(Constants.CHANNEL_ID, name, importance).apply {
                 this.description = description
+                setSound(
+                    Uri.parse("android.resource://" + context.packageName + "/" + R.raw.notification_sound),
+                    audioAttributes
+                )
             }
             val notificationManager =
                 context.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager

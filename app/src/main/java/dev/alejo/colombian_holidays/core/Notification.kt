@@ -6,6 +6,10 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.RingtoneManager
+import android.net.Uri
 import androidx.core.app.NotificationCompat
 import dev.alejo.colombian_holidays.R
 import dev.alejo.colombian_holidays.core.Constants.Companion.CHANNEL_ID
@@ -19,9 +23,14 @@ class Notification: BroadcastReceiver() {
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onReceive(context: Context?, intent: Intent?) {
         val notification = NotificationCompat.Builder(context!!, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher_round)
+            .setSmallIcon(R.drawable.splash_icon)
             .setContentTitle(NOTIFICATION_TITLE)
             .setContentText(intent?.getStringExtra(MESSAGE_EXTRA))
+            .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
+            .setSound(
+                Uri.parse("android.resource://" + context.packageName + "/" + R.raw.notification_sound)
+            )
+            .setAutoCancel(true)
             .build()
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
