@@ -11,6 +11,7 @@ import dev.alejo.colombian_holidays.data.model.HolidayModel
 import dev.alejo.colombian_holidays.databinding.ListHolidayItemBinding
 import dev.alejo.colombian_holidays.ui.view.HolidayDetailActivity
 import dev.alejo.colombian_holidays.ui.view.MainActivity.Companion.holidaySelected
+import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 class ListHolidaysViewHolder(
@@ -43,7 +44,10 @@ class ListHolidaysViewHolder(
             }
             binding.monthName.visibility = View.VISIBLE
         }
-        binding.holidayItem.holiday.text = holiday.localName
+        binding.holidayItem.holiday.text = if(Locale.getDefault().language == "es")
+            holiday.localName
+        else
+            holiday.name
         binding.holidayItem.holidayContainer.setOnClickListener {
             holidaySelected = holiday
             context.startActivity(Intent(context, HolidayDetailActivity::class.java))

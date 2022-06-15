@@ -9,6 +9,7 @@ import dev.alejo.colombian_holidays.data.model.HolidayModel
 import dev.alejo.colombian_holidays.databinding.HolidayItemBinding
 import dev.alejo.colombian_holidays.ui.view.HolidayDetailActivity
 import dev.alejo.colombian_holidays.ui.view.MainActivity
+import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 class HolidaysViewHolder(
@@ -23,7 +24,10 @@ class HolidaysViewHolder(
             binding.day.text = day
             binding.dayName.text = dayName
         }
-        binding.holiday.text = holiday.localName
+        binding.holiday.text = if(Locale.getDefault().language == "es")
+            holiday.localName
+        else
+            holiday.name
         binding.holidayContainer.setOnClickListener {
             MainActivity.holidaySelected = holiday
             context.startActivity(Intent(context, HolidayDetailActivity::class.java))

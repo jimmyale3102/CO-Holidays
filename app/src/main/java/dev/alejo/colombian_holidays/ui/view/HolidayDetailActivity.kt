@@ -17,6 +17,7 @@ import dev.alejo.colombian_holidays.core.setFullScreen
 import dev.alejo.colombian_holidays.databinding.ActivityHolidayDetailBinding
 import dev.alejo.colombian_holidays.domain.model.HolidayNotificationItem
 import dev.alejo.colombian_holidays.ui.viewmodel.HolidayDetailViewModel
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
@@ -42,7 +43,10 @@ class HolidayDetailActivity : AppCompatActivity() {
     private fun showData() {
         holidaySelected?.let { holiday ->
             val date = DateUtils.getDateFromString(holiday.date)
-            binding.holiday.text = holiday.name
+            binding.holiday.text = if(Locale.getDefault().language == "es")
+                holiday.localName
+            else
+                holiday.name
             binding.date.text = DateUtils.getNextHolidayFormatted(holiday.date)
             date?.let { holidayDate ->
                 val daysDifference = TimeUnit.MILLISECONDS.toDays(
@@ -54,8 +58,12 @@ class HolidayDetailActivity : AppCompatActivity() {
                     binding.setNotification.visibility = View.GONE
                     daysDifference.absoluteValue
                 }
-                binding.daysLeft.text = "$daysFormatted " +
-                    if(daysDifference < 0) getString(R.string.ago) else getString(R.string.days_left)
+                binding.daysLeft.text = if (Locale.getDefault().language.contentEquals("en"))
+                    "$daysFormatted " +
+                        if (daysDifference < 0) getString(R.string.ago) else getString(R.string.days_left)
+                else
+                    if (daysDifference < 0) getString(R.string.ago) else getString(R.string.days_left) +
+                        " $daysFormatted ${getString(R.string.days)}"
             }
             if(holiday.fixed)
                 binding.isSameDate.visibility = View.VISIBLE
@@ -74,7 +82,6 @@ class HolidayDetailActivity : AppCompatActivity() {
                 turnNotificationButtonOff()
             else
                 turnNotificationButtonOn()
-            Log.e("Notification->", holidayNotification?.toString() ?: "It's Null")
         }
     }
 

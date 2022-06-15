@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ColombiaHolidays</string>
+    <string name="app_name">Colombian Holidays</string>
     <string name="it_is_holiday">¡It\'s holiday!</string>
     <string name="all_holidays">All holidays</string>
     <string name="upcoming_holiday">Upcoming holiday is on</string>
@@ -17,7 +17,7 @@
     <string name="october">October</string>
     <string name="november">November</string>
     <string name="december">December</string>
-    <string name="about">Is a simple app that shows you all the holidays in Colombia.\n\nMade with @ by Jimmy\nWith help from Checho\nInspired by Jahir</string>
+    <string name="about">Is a simple app that shows you all the holidays in Colombia and some information about each. Also with the option to add a notification for each holiday.\n\nMade with @ by Jimmy\nWith help from Checho\nInspired by Jahir</string>
     <string name="days_left">days left</string>
     <string name="it_is_fixed">It\'s every year on the same date</string>
     <string name="it_is_global">It\'s in every county</string>
@@ -25,6 +25,7 @@
     <string name="public_type">Public</string>
     <string name="ago">ago</string>
     <string name="type">Type:</string>
+    <string name="days">days</string>
     <string name="notification_scheduled">Notification scheduled</string>
     <string name="notification_removed">Notification removed</string>
 </resources>
