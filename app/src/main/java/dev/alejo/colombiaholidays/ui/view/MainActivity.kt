@@ -12,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombiaholidays.R
 import dev.alejo.colombiaholidays.core.Constants.Companion.CODE_200_RESPONSE
+import dev.alejo.colombiaholidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
 import dev.alejo.colombiaholidays.core.DateUtils
 import dev.alejo.colombiaholidays.core.lightStatusBar
 import dev.alejo.colombiaholidays.core.setFullScreen
@@ -19,6 +20,7 @@ import dev.alejo.colombiaholidays.data.model.HolidayModel
 import dev.alejo.colombiaholidays.databinding.ActivityMainBinding
 import dev.alejo.colombiaholidays.ui.adapter.HolidaysAdapter
 import dev.alejo.colombiaholidays.ui.adapter.ListHolidaysAdapter
+import dev.alejo.colombiaholidays.ui.viewmodel.HolidayDetailViewModel
 import dev.alejo.colombiaholidays.ui.viewmodel.HolidayViewModel
 import java.util.*
 
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HolidayViewModel by viewModels()
+    private val holidayDetailsViewModel: HolidayDetailViewModel by viewModels()
     private val holidaysEventList = mutableListOf<EventDay>()
     private val holidaysList = mutableListOf<HolidayModel>()
     private val calendarHolidaysList = mutableListOf<HolidayModel>()
@@ -42,8 +45,16 @@ class MainActivity : AppCompatActivity() {
         setFullScreen(window)
         lightStatusBar(window, false)
         viewModel.onCreate()
+        if(intent.hasExtra(NOTIFICATION_ID_EXTRA))
+            updateDatabase()
         initObservables()
         initUI()
+    }
+
+    private fun updateDatabase() {
+        holidayDetailsViewModel.removeHolidayNotification(
+            intent.getIntExtra(NOTIFICATION_ID_EXTRA, 0)
+        )
     }
 
     private fun initObservables() {
