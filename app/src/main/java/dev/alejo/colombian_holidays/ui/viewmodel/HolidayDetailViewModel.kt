@@ -7,8 +7,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
-import android.media.AudioManager
-import android.media.RingtoneManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
@@ -25,9 +23,7 @@ import dev.alejo.colombian_holidays.domain.InsertHolidayNotificationUseCase
 import dev.alejo.colombian_holidays.domain.RemoveHolidayNotificationUseCase
 import dev.alejo.colombian_holidays.domain.model.HolidayNotificationItem
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-
 
 @HiltViewModel
 class HolidayDetailViewModel @Inject constructor(
@@ -103,7 +99,7 @@ class HolidayDetailViewModel @Inject constructor(
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(1),
+                time,
                 pendingIntent
             )
         }
