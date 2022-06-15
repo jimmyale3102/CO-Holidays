@@ -70,19 +70,18 @@ class HolidayDetailActivity : AppCompatActivity() {
 
     private fun initObservables() {
         viewModel.holidayNotificationResponse.observe(this) { holidayNotification ->
+            if(holidayNotification == null)
+                turnNotificationButtonOff()
+            else
+                turnNotificationButtonOn()
             Log.e("Notification->", holidayNotification?.toString() ?: "It's Null")
         }
     }
 
     private fun removeNotification() {
         viewModel.removeHolidayNotification(holidayNotificationId)
-        binding.setNotification.backgroundTintList =
-            ColorStateList.valueOf(getColor(R.color.light_gray))
-        binding.setNotification.setImageDrawable(
-            ContextCompat.getDrawable(this, R.drawable.ic_notification_off)
-        )
-        binding.setNotification.imageTintList =
-            ColorStateList.valueOf(getColor(R.color.turquoise_blue))
+        viewModel.removeNotification(applicationContext, holidayNotificationId)
+        turnNotificationButtonOff()
         snack(binding.root, R.string.notification_removed)
     }
 
@@ -90,17 +89,33 @@ class HolidayDetailActivity : AppCompatActivity() {
         viewModel.scheduleNotification(
             applicationContext,
             holidayNotificationId,
-            holidaySelected?.name ?: ""
+            holidaySelected?.localName ?: ""
         )
         viewModel.insertHolidayNotification(HolidayNotificationItem(holidayNotificationId))
-        binding.setNotification.backgroundTintList =
+        turnNotificationButtonOn()
+        snack(binding.root, R.string.notification_scheduled)
+    }
+
+    private fun turnNotificationButtonOff() {
+        binding.setNotification.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(applicationContext, R.color.light_gray)
+        )
+        binding.setNotification.setImageDrawable(
+            ContextCompat.getDrawable(this, R.drawable.ic_notification_off)
+        )
+        binding.setNotification.imageTintList =
             ColorStateList.valueOf(getColor(R.color.turquoise_blue))
+    }
+
+    private fun turnNotificationButtonOn() {
+        binding.setNotification.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(applicationContext, R.color.turquoise_blue)
+        )
         binding.setNotification.setImageDrawable(
             ContextCompat.getDrawable(this, R.drawable.ic_notification_on)
         )
         binding.setNotification.imageTintList =
             ColorStateList.valueOf(getColor(R.color.light_gray))
-        snack(binding.root, R.string.notification_scheduled)
     }
 
     private fun initUI() {

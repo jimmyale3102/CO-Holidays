@@ -89,9 +89,26 @@ class HolidayDetailViewModel @Inject constructor(
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(1),
+                System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(10),
                 pendingIntent
             )
+        }
+    }
+
+    fun removeNotification(context: Context, notificationId: Int) {
+        viewModelScope.launch {
+            val intent = Intent(context, Notification::class.java).apply {
+                putExtra(MESSAGE_EXTRA, "asd")
+                putExtra(NOTIFICATION_ID_EXTRA, notificationId)
+            }
+            val pendingIntent = PendingIntent.getBroadcast(
+                context,
+                notificationId,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.cancel(pendingIntent)
         }
     }
 }

@@ -14,6 +14,7 @@ class Constants {
         const val JAHIR_URL = "https://jahir.dev/"
         const val NOTIFICATION_ID = 1
         const val CHANNEL_ID = "colombian_holidays_channel"
+        const val NOTIFICATION_TITLE = "¡It's holiday!"
         const val MESSAGE_EXTRA = "messageExtra"
         const val NOTIFICATION_ID_EXTRA = "notificationIdExtra"
     }

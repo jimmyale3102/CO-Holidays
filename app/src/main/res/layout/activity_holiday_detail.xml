@@ -98,8 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/medium"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/turquoise_blue"
             android:src="@drawable/ic_notification_on"
+            app:backgroundTint="@color/turquoise_blue"
             app:tint="@color/light_white"
             tools:ignore="ContentDescription" />
 
