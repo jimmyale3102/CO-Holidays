@@ -8,6 +8,32 @@
     android:background="@color/light_white"
     tools:context=".ui.view.MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/loading_Content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ProgressBar
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/turquoise_blue"
+            android:scaleX="-1"/>
+
+        <ProgressBar
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/light_gray"/>
+
+    </RelativeLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,6 +52,7 @@
                 android:id="@+id/calendar_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <com.applandeo.materialcalendarview.CalendarView

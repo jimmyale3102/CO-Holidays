@@ -32,6 +32,7 @@
         app:tint="@color/light_white"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x_large"
@@ -63,9 +64,32 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/loading_Content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <ProgressBar
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/light_white"
+            android:scaleX="-1"/>
+
+        <ProgressBar
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/light_gray"/>
+
+    </RelativeLayout>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/x_medium_large"
         android:layout_alignParentBottom="true">
 
