@@ -6,6 +6,7 @@
     <dimen name="large">32dp</dimen>
     <dimen name="medium_large">48dp</dimen>
     <dimen name="x_large">64dp</dimen>
+    <dimen name="x_medium_large">96dp</dimen>
     <dimen name="bottom_sheet_top_margin">160dp</dimen>
     <dimen name="corner">18dp</dimen>
 </resources>

@@ -51,7 +51,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/calendar_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/medium"
                     android:layout_marginTop="@dimen/medium"
                     android:layout_marginEnd="@dimen/medium" />
@@ -61,7 +61,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:visibility="gone"
                 android:layout_marginStart="@dimen/medium"
                 android:layout_marginTop="@dimen/medium"
