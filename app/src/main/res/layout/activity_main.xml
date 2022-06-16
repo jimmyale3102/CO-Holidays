@@ -100,9 +100,12 @@
             android:background="@drawable/top_rounded_shape"
             android:elevation="6dp"
             style="?attr/bottomSheetStyle"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="100dp">
 
             <LinearLayout
+                android:id="@+id/inner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -147,9 +150,9 @@
 
                 <include
                     android:id="@+id/all_holidays_container"
-                    layout="@layout/bottom_sheet"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    layout="@layout/bottom_sheet" />
 
             </LinearLayout>
 

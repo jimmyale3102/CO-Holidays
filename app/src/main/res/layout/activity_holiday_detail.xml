@@ -84,7 +84,7 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:textColor="@color/turquoise_blue"
-            tools:text="@string/it_is_fixed"/>
+            android:text="@string/it_is_fixed"/>
 
         <TextView
             android:id="@+id/is_every_county"
@@ -94,7 +94,7 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:textColor="@color/turquoise_blue"
-            tools:text="@string/it_is_global"/>
+            android:text="@string/it_is_global"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/set_notification"

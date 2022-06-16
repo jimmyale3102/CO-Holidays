@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="@dimen/large"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_white"
@@ -46,7 +47,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/medium"
             android:orientation="vertical">
 
             <LinearLayout
@@ -92,7 +92,6 @@
                 android:layout_marginTop="@dimen/medium"
                 android:layout_marginStart="@dimen/medium"
                 android:layout_marginEnd="@dimen/medium"
-                android:layout_marginBottom="@dimen/large"
                 android:visibility="gone"/>
 
         </LinearLayout>
@@ -103,11 +102,11 @@
         android:id="@+id/year_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/large"
         android:backgroundTint="@color/turquoise_blue"
+        android:layout_marginBottom="@dimen/small"
         android:visibility="gone"
         app:cardCornerRadius="@dimen/corner_25"
-        app:cardElevation="@dimen/small"
+        app:cardElevation="@dimen/x_small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
