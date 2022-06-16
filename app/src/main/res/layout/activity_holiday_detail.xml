@@ -27,6 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x_small"
+        android:layout_marginStart="@dimen/medium"
+        android:layout_marginEnd="@dimen/medium"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/back_button"
         app:layout_constraintStart_toStartOf="parent">
@@ -36,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="36sp"
+            android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="@color/turquoise_blue"
             tools:text="New Year's Day"/>
@@ -45,9 +47,9 @@
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium"
+            android:layout_marginTop="@dimen/small"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@color/turquoise_blue"
             tools:text="Sat, January 1"/>
 
@@ -56,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/turquoise_blue"
             tools:text="13 days left"/>
 
@@ -66,6 +68,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x_large"
+        android:layout_marginStart="@dimen/medium"
+        android:layout_marginEnd="@dimen/medium"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,9 +82,9 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@color/turquoise_blue"
-            android:text="@string/it_is_fixed"/>
+            tools:text="@string/it_is_fixed"/>
 
         <TextView
             android:id="@+id/is_every_county"
@@ -88,15 +92,15 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@color/turquoise_blue"
-            android:text="@string/it_is_global"/>
+            tools:text="@string/it_is_global"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/set_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/medium"
+            android:layout_margin="@dimen/small"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_notification_on"
             app:backgroundTint="@color/turquoise_blue"
