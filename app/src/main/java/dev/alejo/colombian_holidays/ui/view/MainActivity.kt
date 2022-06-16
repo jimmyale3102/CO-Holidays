@@ -163,10 +163,12 @@ class MainActivity : AppCompatActivity() {
             if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {
                 binding.allHolidaysContainer.calendarContent.visibility = View.GONE
                 binding.allHolidaysContainer.listRecycler.visibility = View.VISIBLE
+                binding.allHolidaysContainer.yearContent.visibility = View.VISIBLE
                 binding.contentFormatButton.setImageDrawable(getDrawable(R.drawable.ic_calendar))
             } else {
                 binding.allHolidaysContainer.calendarContent.visibility = View.VISIBLE
                 binding.allHolidaysContainer.listRecycler.visibility = View.GONE
+                binding.allHolidaysContainer.yearContent.visibility = View.GONE
                 binding.contentFormatButton.setImageDrawable(getDrawable(R.drawable.ic_list))
             }
         }

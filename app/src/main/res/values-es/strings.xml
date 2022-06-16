@@ -33,4 +33,9 @@
     <string name="days">días</string>
     <string name="notification_scheduled">Notificación agendada</string>
     <string name="notification_removed">Notificación eliminada</string>
+
+    <!-- Content descriptions -->
+    <string name="view_options">Opciones de vista</string>
+    <string name="go_back">Volver</string>
+    <string name="notification">Notificación</string>
 </resources>

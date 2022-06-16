@@ -61,14 +61,70 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:layout_marginStart="@dimen/medium"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:layout_marginEnd="@dimen/medium" />
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginEnd="@dimen/medium"
+                android:layout_marginBottom="@dimen/large"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/year_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/large"
+        android:backgroundTint="@color/turquoise_blue"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/corner_25"
+        app:cardElevation="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/previous_year_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/turquoise_blue"
+                android:src="@drawable/ic_arrow_left"
+                android:contentDescription="@string/previous"
+                app:borderWidth="0dp"
+                app:tint="@color/light_white"
+                app:elevation="0dp"
+                app:fabSize="mini" />
+
+            <TextView
+                android:id="@+id/current_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/x_small"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/light_white"
+                tools:text="2022"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/next_year_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/turquoise_blue"
+                android:src="@drawable/ic_right_arrow"
+                android:contentDescription="@string/previous"
+                app:borderWidth="0dp"
+                app:tint="@color/light_white"
+                app:elevation="0dp"
+                app:fabSize="mini" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
