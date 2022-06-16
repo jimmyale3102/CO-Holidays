@@ -3,5 +3,6 @@
     <color name="turquoise_blue">#048EA0</color>
     <color name="light_gray">#E5E5E5</color>
     <color name="light_white">#F6F6F6</color>
+    <color name="on_light_color">#616161</color>
     <color name="black">#000000</color>
 </resources>
