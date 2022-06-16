@@ -12,6 +12,7 @@ object DateUtils {
     private val dateFormat = SimpleDateFormat("EEE dd")
     private val nextHolidayDateFormat = SimpleDateFormat("EEE, MMM dd")
 
+    fun getStringDateFromDate(date: Date): String = dateFormatter.format(date)
     fun getDateFromString(dateString: String): Date? = dateFormatter.parse(dateString)
     fun getDayFromDate(date: Date): String = dateFormat.format(date).split(" ")[1]
     fun getDayNameFromDate(date: Date): String = dateFormat.format(date).split(" ")[0]
@@ -35,7 +36,6 @@ object DateUtils {
         calendar.set(Calendar.DAY_OF_MONTH, dateString.split("-")[2].toInt())
         calendar.set(Calendar.MONTH, dateString.split("-")[1].toInt() - 1)
         calendar.set(Calendar.YEAR, dateString.split("-")[0].toInt())
-        Log.e("Time->", dateFormatter.format(calendar.time))
         return calendar.timeInMillis
     }
 }

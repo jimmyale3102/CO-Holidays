@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface HolidayApiClient {
 
     @GET("IsTodayPublicHoliday/${Constants.COLOMBIA_CODE}")
-    suspend fun getTodayHoliday(): Response<HolidayModel>
+    suspend fun getTodayHoliday(): Response<Void>
 
     @GET("PublicHolidays/{year}/${Constants.COLOMBIA_CODE}")
     suspend fun getHolidaysByYear(

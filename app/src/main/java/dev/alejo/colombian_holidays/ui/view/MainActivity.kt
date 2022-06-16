@@ -12,7 +12,6 @@ import com.applandeo.materialcalendarview.model.EventDay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import dev.alejo.colombian_holidays.R
-import dev.alejo.colombian_holidays.core.Constants.Companion.CODE_200_RESPONSE
 import dev.alejo.colombian_holidays.core.Constants.Companion.NOTIFICATION_ID_EXTRA
 import dev.alejo.colombian_holidays.core.DateUtils
 import dev.alejo.colombian_holidays.core.lightStatusBar
@@ -35,10 +34,10 @@ class MainActivity : AppCompatActivity() {
     private val holidaysEventList = mutableListOf<EventDay>()
     private val holidaysList = mutableListOf<HolidayModel>()
     private val calendarHolidaysList = mutableListOf<HolidayModel>()
-    private var currentCalendarMonth = 0
-    private var currentCalendarYear = 0
     private val calendarAdapter by lazy { HolidaysAdapter(this, calendarHolidaysList) }
     private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
+    private var currentCalendarYear = 0
+    private var currentCalendarMonth = 0
     private val backgroundDrawables = arrayListOf(
         R.drawable.background_1,
         R.drawable.background_2,
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setFullScreen(window)
         lightStatusBar(window, false)
-        viewModel.onCreate()
+        viewModel.onCreate(this)
         if(intent.hasExtra(NOTIFICATION_ID_EXTRA))
             updateDatabase()
         initObservables()
@@ -80,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             holidaysList.addAll(holidays)
             holidaysEventList.clear()
             holidays.forEach { holiday ->
+                println(holiday.date)
                 val calendar = Calendar.getInstance()
                 calendar.set(Calendar.YEAR, holiday.date.split("-")[0].toInt())
                 calendar.set(Calendar.MONTH, holiday.date.split("-")[1].toInt() - 1)
@@ -102,11 +102,9 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun showNextHoliday(nextHoliday: HolidayModel) {
-        if(binding.holiday.text.isEmpty() || binding.holiday.text != CODE_200_RESPONSE) {
-            binding.holidayDescription.text = getString(R.string.upcoming_holiday) +
-                " ${DateUtils.getNextHolidayFormatted(nextHoliday.date)} " +
-                "${getString(R.string.next_holiday_for)} ${nextHoliday.localName}"
-        }
+        binding.holidayDescription.text = getString(R.string.upcoming_holiday) +
+            " ${DateUtils.getNextHolidayFormatted(nextHoliday.date)} " +
+            "${getString(R.string.next_holiday_for)} ${nextHoliday.localName}"
     }
 
     private fun showAllHolidaysOnCalendar() {

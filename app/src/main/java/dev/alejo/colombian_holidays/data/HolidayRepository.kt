@@ -17,7 +17,7 @@ class HolidayRepository @Inject constructor(
 
     suspend fun getNextPublicHoliday(): List<HolidayModel> = service.getNextPublicaHoliday()
 
-    suspend fun getTodayHoliday(): String = service.getTodayHoliday()
+    suspend fun getTodayHoliday(): Int = service.getTodayHoliday()
 
     suspend fun getHolidayNotification(holidayNotificationId: Int): HolidayNotificationItem? =
         dao.getHolidayNotification(holidayNotificationId)?.toDomain()
