@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
-            peekHeight = 8
+            peekHeight = 150
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         binding.aboutButton.setOnClickListener {
