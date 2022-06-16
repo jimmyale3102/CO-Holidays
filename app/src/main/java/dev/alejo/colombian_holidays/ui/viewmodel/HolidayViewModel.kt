@@ -58,7 +58,9 @@ class HolidayViewModel @Inject constructor(
         viewModelScope.launch {
             val result = getNextPublicHolidayUseCase()
             if(result.isNotEmpty())
-                nextPublicHolidayResponse.postValue(result[0])
+                nextPublicHolidayResponse.postValue(
+                    if(getTodayHolidayName(result).isEmpty()) result[0] else result[1]
+                )
         }
     }
 
