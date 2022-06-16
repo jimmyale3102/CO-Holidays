@@ -136,6 +136,7 @@
                 android:layout_margin="@dimen/x_small"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/light_white"
+                android:textSize="20sp"
                 tools:text="2022"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
