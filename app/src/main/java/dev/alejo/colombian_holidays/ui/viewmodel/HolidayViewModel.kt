@@ -28,6 +28,8 @@ class HolidayViewModel @Inject constructor(
     val nextPublicHolidayResponse = MutableLiveData<HolidayModel>()
     val todayHolidayResponse = MutableLiveData<String>()
     private val todayHolidayDisplayed = MutableLiveData<Boolean>()
+    val isTodayHolidayLoading = MutableLiveData<Boolean>()
+    val isGetHolidayByYearLoading = MutableLiveData<Boolean>()
 
     fun onCreate(context: Context) {
         todayHolidayDisplayed.postValue(false)
@@ -39,18 +41,20 @@ class HolidayViewModel @Inject constructor(
 
     private fun getTodayHoliday(context: Context) {
         viewModelScope.launch {
+            isTodayHolidayLoading.postValue(true)
             getTodayHolidayUseCase().let { responseCode ->
+                isTodayHolidayLoading.postValue(false)
                 if(responseCode != CODE_200) {
-                    todayHolidayDisplayed.postValue(true)
                     todayHolidayResponse.postValue(
                         when(responseCode) {
                             CODE_200 -> context.getString(R.string.today_is_holiday)
                             CODE_204 -> context.getString(R.string.today_is_not_holiday)
-                            else -> context.getString(R.string.today_is_not_holiday)
+                            else -> context.getString(R.string.validation_failure)
                         }
                     )
                 }
             }
+            todayHolidayDisplayed.postValue(true)
         }
     }
 
@@ -66,6 +70,7 @@ class HolidayViewModel @Inject constructor(
 
     fun getHolidayByYear(year: String) {
         viewModelScope.launch {
+            isGetHolidayByYearLoading.postValue(true)
             val result = getHolidayUseCase(year)
             if(result.isNotEmpty()) {
                 holidayByYearResponse.postValue(result)
@@ -75,6 +80,7 @@ class HolidayViewModel @Inject constructor(
                     todayHolidayResponse.postValue(todayHolidayName)
                 }
             }
+            isGetHolidayByYearLoading.postValue(false)
         }
     }
 

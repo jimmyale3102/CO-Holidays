@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity() {
     private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
     private var currentCalendarYear = DateUtils.getYearFromDate(Date(System.currentTimeMillis()))
     private var currentCalendarMonth = 0
+    private var yearValidated = false
+    private val ALL_HOLIDAYS = 1
+    private val CALENDAR_HOLIDAYS = 0
+    private var displaying = CALENDAR_HOLIDAYS
     private val generalCalendar = Calendar.getInstance().apply {
         set(Calendar.DAY_OF_MONTH, 1)
         set(Calendar.MONTH, 0)
@@ -98,6 +102,19 @@ class MainActivity : AppCompatActivity() {
         viewModel.todayHolidayResponse.observe(this) { todayHoliday ->
             runOnUiThread { showTodayHoliday(todayHoliday) }
         }
+        viewModel.isTodayHolidayLoading.observe(this) { isLoading ->
+            if(isLoading){
+                binding.holidayDataContent.visibility = View.GONE
+                binding.loadingContent.visibility = View.VISIBLE
+            } else {
+                binding.holidayDataContent.visibility = View.VISIBLE
+                binding.loadingContent.visibility = View.GONE
+            }
+        }
+        viewModel.isGetHolidayByYearLoading.observe(this) { isLoading ->
+            binding.allHolidaysContainer.loadingContent.visibility =
+                if(isLoading) View.VISIBLE else View.GONE
+        }
     }
 
     private fun showTodayHoliday(todayHoliday: String) {
@@ -132,18 +149,22 @@ class MainActivity : AppCompatActivity() {
             )
             calendarAdapter.notifyDataSetChanged()
         }
+        yearValidated = false
     }
 
     private fun validateCurrentYear() {
-        val calendarYear = DateUtils.getYearFromDate(
-            binding.allHolidaysContainer.calendar.currentPageDate.time
-        )
-        if(calendarYear != currentCalendarYear) {
-            currentCalendarYear = calendarYear
-            calendarHolidaysList.clear()
-            viewModel.getHolidayByYear(currentCalendarYear.toString())
-        } else {
-            updateMonthHolidays()
+        if(!yearValidated) {
+            yearValidated = true
+            val calendarYear = DateUtils.getYearFromDate(
+                binding.allHolidaysContainer.calendar.currentPageDate.time
+            )
+            if(calendarYear != currentCalendarYear) {
+                currentCalendarYear = calendarYear
+                calendarHolidaysList.clear()
+                viewModel.getHolidayByYear(currentCalendarYear.toString())
+            } else {
+                updateMonthHolidays()
+            }
         }
     }
 
@@ -152,6 +173,26 @@ class MainActivity : AppCompatActivity() {
         generalCalendar.set(Calendar.MONTH, currentCalendarMonth - 1)
         currentCalendarMonth = 0
         binding.allHolidaysContainer.calendar.setDate(generalCalendar.time)
+    }
+
+    private fun checkAllHolidaysContent() {
+        if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {
+            binding.allHolidaysContainer.calendarContent.visibility = View.GONE
+            binding.allHolidaysContainer.listRecycler.visibility = View.VISIBLE
+            binding.allHolidaysContainer.yearContent.visibility = View.VISIBLE
+            binding.contentFormatButton.setImageDrawable(
+                ContextCompat.getDrawable(this, R.drawable.ic_calendar)
+            )
+            displaying = ALL_HOLIDAYS
+        } else {
+            binding.allHolidaysContainer.calendarContent.visibility = View.VISIBLE
+            binding.allHolidaysContainer.listRecycler.visibility = View.GONE
+            binding.allHolidaysContainer.yearContent.visibility = View.GONE
+            binding.contentFormatButton.setImageDrawable(
+                ContextCompat.getDrawable(this, R.drawable.ic_list)
+            )
+            displaying = CALENDAR_HOLIDAYS
+        }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -177,22 +218,14 @@ class MainActivity : AppCompatActivity() {
         }
         binding.allHolidaysContainer.previousYearButton.setOnClickListener {
             updateCalendarYear(currentCalendarYear-1)
+            validateCurrentYear()
         }
         binding.allHolidaysContainer.nextYearButton.setOnClickListener {
             updateCalendarYear(currentCalendarYear+1)
+            validateCurrentYear()
         }
         binding.contentFormatButton.setOnClickListener {
-            if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {
-                binding.allHolidaysContainer.calendarContent.visibility = View.GONE
-                binding.allHolidaysContainer.listRecycler.visibility = View.VISIBLE
-                binding.allHolidaysContainer.yearContent.visibility = View.VISIBLE
-                binding.contentFormatButton.setImageDrawable(getDrawable(R.drawable.ic_calendar))
-            } else {
-                binding.allHolidaysContainer.calendarContent.visibility = View.VISIBLE
-                binding.allHolidaysContainer.listRecycler.visibility = View.GONE
-                binding.allHolidaysContainer.yearContent.visibility = View.GONE
-                binding.contentFormatButton.setImageDrawable(getDrawable(R.drawable.ic_list))
-            }
+            checkAllHolidaysContent()
         }
         BottomSheetBehavior.from(binding.allHolidaysBottomSheet).apply {
             peekHeight = 150
