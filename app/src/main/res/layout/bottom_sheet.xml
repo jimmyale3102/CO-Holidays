@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingBottom="@dimen/large"
+    android:paddingTop="@dimen/medium"
+    android:paddingBottom="@dimen/medium"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_white"
@@ -79,6 +80,7 @@
                     android:id="@+id/calendar_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/x_small"
                     android:layout_marginStart="@dimen/medium"
                     android:layout_marginTop="@dimen/medium"
                     android:layout_marginEnd="@dimen/medium" />
@@ -92,6 +94,7 @@
                 android:layout_marginTop="@dimen/medium"
                 android:layout_marginStart="@dimen/medium"
                 android:layout_marginEnd="@dimen/medium"
+                android:layout_marginBottom="@dimen/x_small"
                 android:visibility="gone"/>
 
         </LinearLayout>

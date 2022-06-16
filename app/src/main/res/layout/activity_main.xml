@@ -102,7 +102,7 @@
             style="?attr/bottomSheetStyle"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="100dp">
+            app:behavior_peekHeight="120dp">
 
             <LinearLayout
                 android:id="@+id/inner"
