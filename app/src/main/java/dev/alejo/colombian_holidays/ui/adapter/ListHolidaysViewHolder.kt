@@ -26,7 +26,7 @@ class ListHolidaysViewHolder(
             binding.holidayItem.day.text = day
             binding.holidayItem.dayName.text = dayName
         }
-        if(showMonth) {
+        binding.monthName.visibility = if(showMonth) {
             binding.monthName.text = when(currentMonth) {
                 1 -> context.getString(R.string.january)
                 2 -> context.getString(R.string.february)
@@ -42,12 +42,12 @@ class ListHolidaysViewHolder(
                 12 -> context.getString(R.string.december)
                 else -> ""
             }
-            binding.monthName.visibility = View.VISIBLE
+            View.VISIBLE
+        } else {
+            View.GONE
         }
-        binding.holidayItem.holiday.text = if(Locale.getDefault().language == "es")
-            holiday.localName
-        else
-            holiday.name
+        binding.holidayItem.holiday.text =
+            if(Locale.getDefault().language == "es") holiday.localName else holiday.name
         binding.holidayItem.holidayContainer.setOnClickListener {
             holidaySelected = holiday
             context.startActivity(Intent(context, HolidayDetailActivity::class.java))

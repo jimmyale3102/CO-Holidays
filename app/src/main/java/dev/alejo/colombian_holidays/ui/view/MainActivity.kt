@@ -36,8 +36,13 @@ class MainActivity : AppCompatActivity() {
     private val calendarHolidaysList = mutableListOf<HolidayModel>()
     private val calendarAdapter by lazy { HolidaysAdapter(this, calendarHolidaysList) }
     private val holidaysListAdapter by lazy { ListHolidaysAdapter(this, holidaysList) }
-    private var currentCalendarYear = 0
+    private var currentCalendarYear = DateUtils.getYearFromDate(Date(System.currentTimeMillis()))
     private var currentCalendarMonth = 0
+    private val generalCalendar = Calendar.getInstance().apply {
+        set(Calendar.DAY_OF_MONTH, 1)
+        set(Calendar.MONTH, 0)
+        set(Calendar.YEAR, currentCalendarYear)
+    }
     private val backgroundDrawables = arrayListOf(
         R.drawable.background_1,
         R.drawable.background_2,
@@ -79,7 +84,6 @@ class MainActivity : AppCompatActivity() {
             holidaysList.addAll(holidays)
             holidaysEventList.clear()
             holidays.forEach { holiday ->
-                println(holiday.date)
                 val calendar = Calendar.getInstance()
                 calendar.set(Calendar.YEAR, holiday.date.split("-")[0].toInt())
                 calendar.set(Calendar.MONTH, holiday.date.split("-")[1].toInt() - 1)
@@ -104,13 +108,16 @@ class MainActivity : AppCompatActivity() {
     private fun showNextHoliday(nextHoliday: HolidayModel) {
         binding.holidayDescription.text = getString(R.string.upcoming_holiday) +
             " ${DateUtils.getNextHolidayFormatted(nextHoliday.date)} " +
-            "${getString(R.string.next_holiday_for)} ${nextHoliday.localName}"
+            "${getString(R.string.next_holiday_for)} " +
+            if(Locale.getDefault().language == "es") nextHoliday.localName else nextHoliday.name
     }
 
     private fun showAllHolidaysOnCalendar() {
         updateMonthHolidays()
+        holidaysListAdapter.clearData()
         holidaysListAdapter.notifyDataSetChanged()
         binding.allHolidaysContainer.calendar.setEvents(holidaysEventList)
+        binding.allHolidaysContainer.currentYear.text = currentCalendarYear.toString()
     }
 
     private fun updateMonthHolidays() {
@@ -135,8 +142,16 @@ class MainActivity : AppCompatActivity() {
             currentCalendarYear = calendarYear
             calendarHolidaysList.clear()
             viewModel.getHolidayByYear(currentCalendarYear.toString())
+        } else {
+            updateMonthHolidays()
         }
-        updateMonthHolidays()
+    }
+
+    private fun updateCalendarYear(newYear: Int) {
+        generalCalendar.set(Calendar.YEAR, newYear)
+        generalCalendar.set(Calendar.MONTH, currentCalendarMonth - 1)
+        currentCalendarMonth = 0
+        binding.allHolidaysContainer.calendar.setDate(generalCalendar.time)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -153,11 +168,18 @@ class MainActivity : AppCompatActivity() {
         binding.allHolidaysContainer.calendarRecycler.adapter = calendarAdapter
         binding.allHolidaysContainer.listRecycler.layoutManager = listLayoutManager
         binding.allHolidaysContainer.listRecycler.adapter = holidaysListAdapter
+        binding.allHolidaysContainer.currentYear.text = currentCalendarYear.toString()
         binding.allHolidaysContainer.calendar.setOnForwardPageChangeListener {
             validateCurrentYear()
         }
         binding.allHolidaysContainer.calendar.setOnPreviousPageChangeListener {
             validateCurrentYear()
+        }
+        binding.allHolidaysContainer.previousYearButton.setOnClickListener {
+            updateCalendarYear(currentCalendarYear-1)
+        }
+        binding.allHolidaysContainer.nextYearButton.setOnClickListener {
+            updateCalendarYear(currentCalendarYear+1)
         }
         binding.contentFormatButton.setOnClickListener {
             if(binding.allHolidaysContainer.calendarContent.visibility == View.VISIBLE) {

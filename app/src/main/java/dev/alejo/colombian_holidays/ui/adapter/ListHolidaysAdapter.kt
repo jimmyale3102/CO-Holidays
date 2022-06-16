@@ -36,4 +36,8 @@ class ListHolidaysAdapter(
 
     override fun getItemCount(): Int = holidaysList.size
 
+    fun clearData() {
+        currentMonth = 0
+    }
+
 }
