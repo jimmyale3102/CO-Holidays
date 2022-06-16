@@ -40,6 +40,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,8 +80,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/calendar_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/x_small"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/medium"
                     android:layout_marginStart="@dimen/medium"
                     android:layout_marginTop="@dimen/medium"
                     android:layout_marginEnd="@dimen/medium" />
@@ -90,11 +91,12 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="0dp"
+                android:paddingBottom="@dimen/large"
                 android:layout_marginTop="@dimen/medium"
                 android:layout_marginStart="@dimen/medium"
                 android:layout_marginEnd="@dimen/medium"
-                android:layout_marginBottom="@dimen/x_small"
                 android:visibility="gone"/>
 
         </LinearLayout>
@@ -106,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/turquoise_blue"
-        android:layout_marginBottom="@dimen/small"
+        android:layout_marginBottom="@dimen/large"
         android:visibility="gone"
         app:cardCornerRadius="@dimen/corner_25"
         app:cardElevation="@dimen/x_small"
