@@ -10,7 +10,6 @@
         android:id="@+id/month_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/medium"
         android:layout_marginBottom="@dimen/medium"
         android:visibility="gone"
         android:textColor="@color/black"

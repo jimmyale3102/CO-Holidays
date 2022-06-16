@@ -35,4 +35,5 @@
     <string name="app_version" translatable="false">Version: 1.0.0</string>
     <string name="view_options">View options</string>
     <string name="go_back">Back</string>
+    <string name="notification">Notification</string>
 </resources>
