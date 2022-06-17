@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="@dimen/medium"
+    android:paddingBottom="@dimen/medium"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_white"
+    tools:context=".ui.view.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/loading_Content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/small"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ProgressBar
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/turquoise_blue"
+            android:scaleX="-1"/>
+
+        <ProgressBar
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/light_gray"/>
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/calendar_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.applandeo.materialcalendarview.CalendarView
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/x_small"
+                    app:dayNamesBarColor="@color/light_white"
+                    app:eventsEnabled="true"
+                    app:headerBackgroundColor="@color/turquoise_blue"
+                    app:pagesColor="@color/light_white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium"
+                    android:layout_marginTop="@dimen/medium"
+                    android:text="@string/holidays"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/calendar_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/medium"
+                    android:layout_marginStart="@dimen/medium"
+                    android:layout_marginTop="@dimen/medium"
+                    android:layout_marginEnd="@dimen/medium" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="0dp"
+                android:paddingBottom="@dimen/large"
+                android:layout_marginTop="@dimen/medium"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginEnd="@dimen/medium"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/year_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise_blue"
+        android:layout_marginBottom="@dimen/large"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/corner_25"
+        app:cardElevation="@dimen/x_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/previous_year_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/turquoise_blue"
+                android:src="@drawable/ic_arrow_left"
+                android:contentDescription="@string/previous"
+                app:borderWidth="0dp"
+                app:tint="@color/light_white"
+                app:elevation="0dp"
+                app:fabSize="mini" />
+
+            <TextView
+                android:id="@+id/current_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/x_small"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/light_white"
+                android:textSize="20sp"
+                tools:text="2022"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/next_year_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/turquoise_blue"
+                android:src="@drawable/ic_right_arrow"
+                android:contentDescription="@string/previous"
+                app:borderWidth="0dp"
+                app:tint="@color/light_white"
+                app:elevation="0dp"
+                app:fabSize="mini" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

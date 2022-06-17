@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Festivos Colombia</string>
+    <string name="today_is_holiday">¡Hoy es festivo!</string>
+    <string name="today_is_not_holiday">Hoy no es festivo</string>
+    <string name="validation_failure">Fallo de validación</string>
+    <string name="it_is_holiday">¡Es Festivo!</string>
+    <string name="all_holidays">Todos los festivos</string>
+    <string name="upcoming_holiday">El próximo festivo es el</string>
+    <string name="next_holiday_for">y es por</string>
+    <string name="holidays">Festivos</string>
+    <string name="january">Enero</string>
+    <string name="february">Febrero</string>
+    <string name="march">Marzo</string>
+    <string name="april">Abril</string>
+    <string name="may">Mayo</string>
+    <string name="june">Junio</string>
+    <string name="july">Julio</string>
+    <string name="august">Agosto</string>
+    <string name="september">Septiembre</string>
+    <string name="october">Octubre</string>
+    <string name="november">Noviembre</string>
+    <string name="december">Diciembre</string>
+    <string name="about">Es una aplicación sencilla que muestra todos los festivos en Colombia y alguna información sobre cada uno. Además con la opción de poder agregar una notificación por cada festivo\n\nHecho con @ por Jimmy\nCon ayuda de Checho\nInspirado por Jahir</string>
+    <string name="pictures_credits">Las imágenes son de Pixels</string>
+    <string name="days_left">Faltan</string>
+    <string name="it_is_fixed">Este festivo es cada año en la misma fecha</string>
+    <string name="it_is_global">Este festivo es en cada región</string>
+    <string name="launch_year">Año de lanzamiento:</string>
+    <string name="public_type">Público</string>
+    <string name="ago">Hace</string>
+    <string name="type">Tipo:</string>
+    <string name="days">días</string>
+    <string name="notification_scheduled">Notificación agendada</string>
+    <string name="notification_removed">Notificación eliminada</string>
+
+    <!-- Content descriptions -->
+    <string name="view_options">Opciones de vista</string>
+    <string name="go_back">Volver</string>
+    <string name="notification">Notificación</string>
+</resources>

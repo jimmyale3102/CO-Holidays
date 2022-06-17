@@ -1,18 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/turquoise_blue"
+    tools:context=".ui.view.MainActivity">
+
+    <ImageView
+        android:id="@+id/background_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0.2"
+        app:srcCompat="@drawable/background_1"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/about_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/medium_large"
+        android:layout_marginEnd="@dimen/small"
+        android:background="@drawable/background_transparent"
+        android:elevation="@dimen/x_small"
+        android:src="@drawable/ic_information"
+        android:padding="@dimen/x_small"
+        android:contentDescription="@string/about"
+        app:tint="@color/light_white"/>
 
     <TextView
+        android:id="@+id/today_is_holiday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/small"
+        android:layout_marginTop="@dimen/x_large"
+        android:layout_toStartOf="@id/about_button"
+        android:textColor="@color/light_white"
+        android:textSize="20sp"
+        android:text="@string/today_is_holiday"
+        android:visibility="gone" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/holiday_data_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x_large"
+        android:layout_marginEnd="@dimen/x_large"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/holiday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_white"
+            android:textAlignment="center"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            tools:text="New Year's Day" />
+
+        <TextView
+            android:id="@+id/holiday_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium"
+            android:textColor="@color/light_white"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            tools:text="New Year’s Day is the first day of the year, or January 1, in the Gregorian calendar." />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_Content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <ProgressBar
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/light_white"
+            android:scaleX="-1"/>
+
+        <ProgressBar
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/light_gray"/>
+
+    </RelativeLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x_medium_large"
+        android:layout_alignParentBottom="true">
+
+        <FrameLayout
+            android:id="@+id/all_holidays_bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/top_rounded_shape"
+            android:elevation="6dp"
+            style="?attr/bottomSheetStyle"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="120dp">
+
+            <LinearLayout
+                android:id="@+id/inner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_remove"
+                    tools:ignore="ContentDescription" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/all_holidays"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        tools:ignore="RelativeOverlap" />
+
+                    <ImageButton
+                        android:id="@+id/content_format_button"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/small"
+                        android:background="@drawable/background_transparent"
+                        android:elevation="@dimen/x_small"
+                        android:padding="@dimen/x_small"
+                        android:src="@drawable/ic_list"
+                        android:contentDescription="@string/view_options"
+                        app:tint="@color/turquoise_blue"/>
+
+                </RelativeLayout>
+
+                <include
+                    android:id="@+id/all_holidays_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small"
+                    layout="@layout/bottom_sheet" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</RelativeLayout>

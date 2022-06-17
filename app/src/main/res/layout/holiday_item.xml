@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holiday_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/x_small"
+    android:layout_marginStart="@dimen/x_small"
+    android:layout_marginEnd="@dimen/x_small"
+    android:layout_marginBottom="@dimen/medium"
+    android:clickable="true"
+    android:focusable="true"
+    android:backgroundTint="@color/light_gray"
+    app:cardElevation="@dimen/x_small"
+    app:cardCornerRadius="@dimen/corner">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/x_small"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/small"
+            android:background="@color/turquoise_blue"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/day_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:maxLength="3"
+                tools:text="Sat"/>
+
+            <TextView
+                android:id="@+id/day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-6dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                tools:text="31"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/holiday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="Merry christmas"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
