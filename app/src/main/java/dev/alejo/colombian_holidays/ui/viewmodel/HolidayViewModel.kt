@@ -30,8 +30,10 @@ class HolidayViewModel @Inject constructor(
     private val todayHolidayDisplayed = MutableLiveData<Boolean>()
     val isTodayHolidayLoading = MutableLiveData<Boolean>()
     val isGetHolidayByYearLoading = MutableLiveData<Boolean>()
+    val isTodayHoliday = MutableLiveData<Boolean>()
 
     fun onCreate(context: Context) {
+        isTodayHoliday.postValue(false)
         todayHolidayDisplayed.postValue(false)
         val currentYear = Calendar.getInstance().get(Calendar.YEAR).toString()
         getHolidayByYear(currentYear)
@@ -78,6 +80,7 @@ class HolidayViewModel @Inject constructor(
                 if(todayHolidayDisplayed.value == false && todayHolidayName.isNotEmpty()) {
                     todayHolidayDisplayed.postValue(true)
                     todayHolidayResponse.postValue(todayHolidayName)
+                    isTodayHoliday.postValue(true)
                 }
             }
             isGetHolidayByYearLoading.postValue(false)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Festivos Colombia</string>
-    <string name="today_is_holiday">Hoy es festivo</string>
+    <string name="today_is_holiday">¡Hoy es festivo!</string>
     <string name="today_is_not_holiday">Hoy no es festivo</string>
     <string name="validation_failure">Fallo de validación</string>
     <string name="it_is_holiday">¡Es Festivo!</string>

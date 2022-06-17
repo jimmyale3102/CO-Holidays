@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Colombian Holidays</string>
-    <string name="today_is_holiday">Today is a public holiday</string>
+    <string name="today_is_holiday">¡Today is a public holiday!</string>
     <string name="today_is_not_holiday">Today is not a public holiday</string>
     <string name="validation_failure">Validation failure</string>
     <string name="it_is_holiday">¡It\'s holiday!</string>

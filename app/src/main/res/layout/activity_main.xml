@@ -31,21 +31,33 @@
         android:contentDescription="@string/about"
         app:tint="@color/light_white"/>
 
+    <TextView
+        android:id="@+id/today_is_holiday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/small"
+        android:layout_marginTop="@dimen/x_large"
+        android:layout_toStartOf="@id/about_button"
+        android:textColor="@color/light_white"
+        android:textSize="20sp"
+        android:text="@string/today_is_holiday"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/holiday_data_content"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x_large"
         android:layout_marginEnd="@dimen/x_large"
         android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/holiday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
             android:textColor="@color/light_white"
             android:textAlignment="center"
             android:textSize="34sp"
@@ -57,7 +69,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium"
-            android:fontFamily="@font/roboto"
             android:textColor="@color/light_white"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -127,7 +138,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/roboto"
                         android:text="@string/all_holidays"
                         android:textColor="@color/black"
                         android:textSize="16sp"

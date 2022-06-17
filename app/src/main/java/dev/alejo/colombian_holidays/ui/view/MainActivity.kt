@@ -102,6 +102,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.todayHolidayResponse.observe(this) { todayHoliday ->
             runOnUiThread { showTodayHoliday(todayHoliday) }
         }
+        viewModel.isTodayHoliday.observe(this) { isTodayHoliday ->
+            if(isTodayHoliday)
+                runOnUiThread { binding.todayIsHoliday.visibility = View.VISIBLE }
+        }
         viewModel.isTodayHolidayLoading.observe(this) { isLoading ->
             if(isLoading){
                 binding.holidayDataContent.visibility = View.GONE
