@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 34
     defaultConfig {
         applicationId 'dev.alejo.colombian_holidays'
         minSdk 28
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.0.0"
 
