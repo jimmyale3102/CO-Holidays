@@ -6,7 +6,7 @@ class Constants {
         const val COLOMBIA_CODE = "CO"
         const val CODE_200 = 200
         const val CODE_204 = 204
-        const val JIMMY_URL = "https://twitter.com/jimmyale3201"
+        const val JIMMY_URL = "https://www.jimmyplazas.dev"
         const val CHECHO_URL = "https://sergio-rojas.dev/"
         const val JAHIR_URL = "https://jahir.dev/"
         const val PICTURES_URL = "https://www.pexels.com/"
